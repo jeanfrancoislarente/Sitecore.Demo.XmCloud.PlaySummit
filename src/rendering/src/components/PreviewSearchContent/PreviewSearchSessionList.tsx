@@ -18,19 +18,15 @@ const PreviewSearchSessionList = (props: SessionListProps): JSX.Element => {
   };
 
   return (
-    <section className={`session-list item-grid sessions-grid`}>
-      <span className={`session-list-title`}>
+    <section className="session-list item-grid sessions-grid">
+      <span className="session-list-title">
         {title}
-        <a className={`view-all`} onClick={viewAllClick}>
+        <a className="view-all" onClick={viewAllClick}>
           View All
         </a>
       </span>
-      <div className={`grid-content session-list-content`}>
-        {list.length > 0 &&
-          list.map((item) => (
-            // eslint-disable-next-line react/jsx-key
-            <SessionCard {...item} />
-          ))}
+      <div className="grid-content session-list-content">
+        {list.length > 0 && list.map((item) => <SessionCard key={item.id} {...item} />)}
       </div>
     </section>
   );

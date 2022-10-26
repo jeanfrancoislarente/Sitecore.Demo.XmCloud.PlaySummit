@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Text } from '@sitecore-jss/sitecore-jss-nextjs';
 import { faBuilding, faMapMarkerAlt, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import InfoText from '../NonSitecore/InfoText';
 
@@ -18,28 +17,28 @@ const SessionCard = (props: SpeakerCardProps): JSX.Element => {
 
   const jobTitle = job_title && (
     <InfoText Icon={faUserTie}>
-      <Text tag="span" field={{ value: job_title }} />
+      <span>{job_title}</span>
     </InfoText>
   );
 
   const companyValue = company && (
     <InfoText Icon={faBuilding}>
-      <Text tag="span" field={{ value: company }} />
+      <span>{company}</span>
     </InfoText>
   );
 
   const locationValue = location && (
     <InfoText Icon={faMapMarkerAlt}>
-      <Text tag="span" field={{ value: location }} />
+      <span>{location}</span>
     </InfoText>
   );
 
   return (
     <Link href={url}>
-      <a className={`row-item`}>
-        <img src={image_url} width="150" alt={`Speaker image`} />
-        <div className={`item-details item-details-left`}>
-          <Text tag="div" className={`item-title`} field={{ value: name }} />
+      <a className="row-item">
+        <img src={image_url} width="150" alt="Speaker image" />
+        <div className="item-details item-details-left">
+          <div className="item-title">{name}</div>
           {jobTitle}
           {companyValue}
           {locationValue}

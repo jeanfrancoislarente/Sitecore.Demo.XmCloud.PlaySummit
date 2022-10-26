@@ -32,37 +32,33 @@ const PreviewSearchContainer = ({
     widgetId: 'rfkid_6',
   });
 
-  const suggestionsAvailable = suggestions && suggestions.content.length > 0, // TODO: Review suggestions
+  const suggestionsAvailable = false, // suggestions && suggestions.content.length > 0, // TODO: Review suggestions
     sessionsAvailable = sessions && sessions.content.length > 0,
     speakersAvailable = speakers && speakers.content.length > 0,
     newsAvailable = news && news.content.length > 0;
 
   return (
     (suggestionsAvailable || sessionsAvailable || speakersAvailable || newsAvailable) && (
-      <div className={`preview-search-content-popup`}>
+      <div className="preview-search-content-popup">
         {suggestionsAvailable && (
-          <SuggestionList
-            title={`Do you mean?`}
-            list={suggestions.content}
-            closePopup={closePopup}
-          />
+          <SuggestionList title="Do you mean?" list={suggestions.content} closePopup={closePopup} />
         )}
         {sessionsAvailable && (
           <PreviewSearchSessionList
-            title={`Sessions`}
+            title="Sessions"
             list={sessions.content}
             closePopup={closePopup}
           />
         )}
         {speakersAvailable && (
           <PreviewSearchSpeakerList
-            title={`Speakers`}
+            title="Speakers"
             list={speakers.content}
             closePopup={closePopup}
           />
         )}
         {newsAvailable && (
-          <PreviewSearchNewsList title={`News`} list={news.content} closePopup={closePopup} />
+          <PreviewSearchNewsList title="News" list={news.content} closePopup={closePopup} />
         )}
       </div>
     )
