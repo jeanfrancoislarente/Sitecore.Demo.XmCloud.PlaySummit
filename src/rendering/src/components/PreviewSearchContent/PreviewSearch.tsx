@@ -1,16 +1,11 @@
 import { useCallback, useRef, useState } from 'react';
 import debounce from '../../helpers/Debounce';
-import useDiscoverQueries from '../../hooks/useDiscoverQueries';
 import { DiscoverNews } from '../../interfaces/DiscoverNews';
 import { DiscoverSession } from '../../interfaces/DiscoverSession';
 import { DiscoverSpeaker } from '../../interfaces/DiscoverSpeaker';
 import ClickOutside from '../ShopCommon/ClickOutside';
 import PreviewSearchContainer from './PreviewSearchContainer';
-import PreviewSearchNewsList from './PreviewSearchNewsList';
-import PreviewSearchSessionList from './PreviewSearchSessionList';
-import PreviewSearchSpeakerList from './PreviewSearchSpeakerList';
 import SearchInput from './SearchInput';
-import SuggestionList from './SuggestionList';
 
 export type Result = {
   title?: string;
@@ -42,7 +37,7 @@ const PreviewSearch = (): JSX.Element => {
     (keyphrase: string) => {
       changeKeyphrase(keyphrase);
     },
-    [keyphrase]
+    [changeKeyphrase]
   );
 
   const closePopup = useCallback(() => setOpen(false), []);

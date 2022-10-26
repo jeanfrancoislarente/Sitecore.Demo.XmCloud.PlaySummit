@@ -15,7 +15,7 @@ const PreviewSearchSpeakerList = (props: SpeakerListProps): JSX.Element => {
   const viewAllClick = () => {
     closePopup();
     router.push(`${VIEW_ALL_SPEAKERS_URL}`);
-  }
+  };
 
   return (
     <section className={`speaker-list item-grid`}>
