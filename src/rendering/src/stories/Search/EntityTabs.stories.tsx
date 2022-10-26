@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { FiltersProps } from 'components/Search/Filters';
 import React from 'react';
 
 import EntityTabs from '../../components/Search/EntityTabs';
@@ -10,7 +11,7 @@ export default {
 } as ComponentMeta<typeof EntityTabs>;
 
 const Template: ComponentStory<typeof EntityTabs> = (args) => (
-  <SearchTabProvider>
+  <SearchTabProvider filters={{} as FiltersProps['options']}>
     <EntityTabs {...args} />
   </SearchTabProvider>
 );
@@ -51,3 +52,5 @@ Default.args = {
     },
   ],
 };
+
+// PROFLE=sitecore aws3 sync ./build s3://rfk-widget-sdk-doc/playsummit --acl public-read --delete && PROFILE=sitecore aws cloudfront create-invalidation --distribution-id EGKWMJ67NHVCP --paths "/index.html"

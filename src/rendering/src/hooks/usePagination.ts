@@ -25,6 +25,7 @@ const generatePages = (totalPages: number, currentPage: number): Array<Page> => 
   return pages;
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const usePagination = ({
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore

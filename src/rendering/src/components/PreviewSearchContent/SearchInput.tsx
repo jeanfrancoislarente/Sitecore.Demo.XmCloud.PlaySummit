@@ -19,46 +19,53 @@ const SearchInput = ({
   placeholder,
   redirectUrl,
   setOpen,
-  open
+  open,
 }: SearchInputProps): JSX.Element => {
   const [inputSearchVisibility, setInputSearchVisibility] = useState(false);
   const router = useRouter();
   const ref = useRef(null);
 
+  const redirectToSearchPage = useCallback(
+    (searchTerm: string) => {
+      setOpen(false);
+      router.push(`${redirectUrl}?q=${searchTerm}`);
+    },
+    [redirectUrl, router, setOpen]
+  );
+
   const keyListener = useCallback(
     (event: KeyboardEvent): void => {
       switch (event.key) {
         case 'Escape':
-          open ?
-          setOpen(false) :
-          setInputSearchVisibility(false);
+          open ? setOpen(false) : setInputSearchVisibility(false);
           break;
         case 'Enter':
           redirectToSearchPage((event.target as HTMLInputElement).value);
       }
     },
-    [open]
+    [open, redirectToSearchPage, setOpen]
   );
 
   const handleSearchIconClick = useCallback(() => {
     setInputSearchVisibility(!inputSearchVisibility);
   }, [inputSearchVisibility]);
 
-  const redirectToSearchPage = (searchTerm: string) => {
-    setOpen(false);
-    router.push(`${redirectUrl}?q=${searchTerm}`);
-  };
+  const handleOnChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setSearchString(e.target.value || '');
+      setOpen(true);
+    },
+    [setOpen, setSearchString]
+  );
 
-  const handleOnChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setSearchString(e.target.value || '');
-    setOpen(true);
-  }, []);
-
-  const handleOnFocus = useCallback((e: FocusEvent<HTMLInputElement>) => {
-    const keywords = e.target.value || '';
-    onFocus(keywords);
-    setOpen(true);
-  }, []);
+  const handleOnFocus = useCallback(
+    (e: FocusEvent<HTMLInputElement>) => {
+      const keywords = e.target.value || '';
+      onFocus(keywords);
+      setOpen(true);
+    },
+    [onFocus, setOpen]
+  );
 
   return (
     <>

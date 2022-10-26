@@ -210,7 +210,7 @@ type AccordionFacetValueListProps = Omit<
   'facetId' | 'onFacetClick'
 >;
 
-const AccordionFacetValueList = (props: ScopedProps<AccordionFacetValueListProps>) => {
+const AccordionFacetValueList = (props: ScopedProps<AccordionFacetValueListProps>): JSX.Element => {
   const { __scopeAccordionFacets, ...restProps } = props;
   const facetListScope = useFacetListScope(__scopeAccordionFacets);
   const { facetId, onFacetItemClick } = useAccordionFacetContext(

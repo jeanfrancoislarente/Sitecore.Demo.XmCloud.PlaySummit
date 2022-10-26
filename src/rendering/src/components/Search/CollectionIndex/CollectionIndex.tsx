@@ -2,6 +2,7 @@ import * as CollectionPrimitive from '@radix-ui/react-collection';
 import type { RefObject } from 'react';
 import React from 'react';
 
+// eslint-disable-next-line
 function createCollectionIndex<ItemElement extends HTMLElement>(name: string): any {
   const COLLECTION_INDEX_NAME = name + 'CollectionIndex';
   const [Collection, useCollection, createCollectionScope] =
@@ -11,6 +12,7 @@ function createCollectionIndex<ItemElement extends HTMLElement>(name: string): a
    * useCollectionIndex
    * --------------------------------------------------------------------------------------------- */
 
+  // eslint-disable-next-line
   function useCollectionIndex(currentRef: RefObject<ItemElement>, scope: any) {
     const getItems = useCollection(scope);
     return React.useCallback(() => {

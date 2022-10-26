@@ -2,8 +2,8 @@ import * as RadixContext from '@radix-ui/react-context';
 import * as Radix from '@radix-ui/react-primitive';
 import React, { useCallback } from 'react';
 
-import type { Pagination as UsePagination } from '../hooks/usePagination';
-import usePagination from '../hooks/usePagination';
+import type { Pagination as UsePagination } from '../../../hooks/usePagination';
+import usePagination from '../../../hooks/usePagination';
 
 /* -------------------------------------------------------------------------------------------------
  * Pagination
@@ -90,16 +90,17 @@ type PaginationFirstPageProps = PrimitiveLinkProps & {
 const PaginationFirstPage = React.forwardRef<PrimitiveLinkElement, PaginationFirstPageProps>(
   (props: ScopedProps<PaginationFirstPageProps>, forwardedRef) => {
     const { __scopePagination, children, ...paginationFirstProps } = props;
+    const { onClick: onClickHandler } = paginationFirstProps;
     const { hrefFunc, currentPage, setPage } = usePaginationContext(
       PAGINATION_FIRST_PAGE,
       __scopePagination
     );
     const onClick = useCallback(
       (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        paginationFirstProps.onClick?.(event);
+        onClickHandler?.(event);
         setPage(1);
       },
-      [setPage, paginationFirstProps.onClick]
+      [setPage, onClickHandler]
     );
 
     return (
@@ -136,16 +137,17 @@ type PaginationLastPageProps = PrimitiveLinkProps & {
 const PaginationLastPage = React.forwardRef<PrimitiveLinkElement, PaginationLastPageProps>(
   (props: ScopedProps<PaginationLastPageProps>, forwardedRef) => {
     const { __scopePagination, children, ...paginationLastProps } = props;
+    const { onClick: onClickHandler } = paginationLastProps;
     const { hrefFunc, totalPages, currentPage, setPage } = usePaginationContext(
       PAGINATION_LAST_PAGE,
       __scopePagination
     );
     const onClick = useCallback(
       (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        paginationLastProps.onClick?.(event);
+        onClickHandler?.(event);
         setPage(totalPages);
       },
-      [setPage, totalPages, paginationLastProps.onClick]
+      [setPage, totalPages, onClickHandler]
     );
 
     return (
@@ -182,16 +184,17 @@ type PaginationPrevPageProps = PrimitiveLinkProps & {
 const PaginationPrevPage = React.forwardRef<PrimitiveLinkElement, PaginationPrevPageProps>(
   (props: ScopedProps<PaginationPrevPageProps>, forwardedRef) => {
     const { __scopePagination, children, ...paginationPrevProps } = props;
+    const { onClick: onClickHandler } = paginationPrevProps;
     const { currentPage, prevPage, hrefFunc, setPage } = usePaginationContext(
       PAGINATION_PREV_PAGE,
       __scopePagination
     );
     const onClick = useCallback(
       (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        paginationPrevProps.onClick?.(event);
+        onClickHandler?.(event);
         setPage(prevPage);
       },
-      [paginationPrevProps.onClick, setPage, prevPage]
+      [onClickHandler, setPage, prevPage]
     );
 
     return (
@@ -228,16 +231,17 @@ type PaginationNextProps = PrimitiveLinkProps & {
 const PaginationNextPage = React.forwardRef<PrimitiveLinkElement, PaginationNextProps>(
   (props: ScopedProps<PaginationNextProps>, forwardedRef) => {
     const { __scopePagination, children, ...paginationNextProps } = props;
+    const { onClick: onClickHandler } = paginationNextProps;
     const { currentPage, nextPage, hrefFunc, setPage } = usePaginationContext(
       PAGINATION_NEXT_PAGE,
       __scopePagination
     );
     const onClick = useCallback(
       (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        paginationNextProps.onClick?.(event);
+        onClickHandler?.(event);
         setPage(nextPage);
       },
-      [paginationNextProps.onClick, setPage, nextPage]
+      [onClickHandler, setPage, nextPage]
     );
 
     return (
@@ -303,16 +307,17 @@ type PaginationPageProps = PrimitiveLinkProps & {
 const PaginationPage = React.forwardRef<PrimitiveLinkElement, PaginationPageProps>(
   (props: ScopedProps<PaginationPageProps>, forwardedRef) => {
     const { __scopePagination, page, ...paginationPageProps } = props;
+    const { onClick: onClickHandler } = paginationPageProps;
     const { currentPage, setPage, hrefFunc } = usePaginationContext(
       PAGINATION_PAGE,
       __scopePagination
     );
     const onClick = useCallback(
       (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        paginationPageProps.onClick?.(event);
+        onClickHandler?.(event);
         setPage(page);
       },
-      [paginationPageProps.onClick, setPage, page]
+      [onClickHandler, setPage, page]
     );
 
     return (

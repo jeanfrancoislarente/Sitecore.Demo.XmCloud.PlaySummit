@@ -21,9 +21,9 @@ const PreviewSearchSessionList = (props: SessionListProps): JSX.Element => {
     <section className={`session-list item-grid sessions-grid`}>
       <span className={`session-list-title`}>
         {title}
-          <a className={`view-all`} onClick={viewAllClick}>
-            View All
-          </a>
+        <a className={`view-all`} onClick={viewAllClick}>
+          View All
+        </a>
       </span>
       <div className={`grid-content session-list-content`}>
         {list.length > 0 &&
