@@ -1,7 +1,7 @@
-import { Image, ImageField } from '@sitecore-jss/sitecore-jss-nextjs';
-import { ComponentProps } from 'lib/component-props';
 import Link from 'next/link';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { ImageField, Image } from '@sitecore-jss/sitecore-jss-nextjs';
+import { ComponentProps } from 'lib/component-props';
 import { isCommerceEnabled } from '../../helpers/CommerceHelper';
 import { isContentSearchEnabled } from '../../helpers/ContentSearchHelper';
 import PreviewSearch from '../PreviewSearchContent/PreviewSearch';

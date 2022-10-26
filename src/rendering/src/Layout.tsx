@@ -1,21 +1,21 @@
 /**
  * This Layout is needed for Starter Kit.
  */
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React, { useEffect } from 'react'; // DEMO TEAM CUSTOMIZATION - Log page views in CDP
+import Head from 'next/head';
 // DEMO TEAM CUSTOMIZATION - Add LayoutServicePageState
 import {
-  Field,
+  Placeholder,
   getPublicUrl,
   LayoutServiceData,
+  Field,
   LayoutServicePageState,
-  Placeholder,
 } from '@sitecore-jss/sitecore-jss-nextjs';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Head from 'next/head';
-import React, { useEffect } from 'react'; // DEMO TEAM CUSTOMIZATION - Log page views in CDP
 import Scripts from 'src/Scripts';
-import HeaderCdpMessageBar from './components/HeaderCdpMessageBar';
 // DEMO TEAM CUSTOMIZATION - CDP integration
 import { logViewEvent } from './services/CdpService';
+import HeaderCdpMessageBar from './components/HeaderCdpMessageBar';
 // END CUSTOMIZATION
 
 // Prefix public assets with a public URL to enable compatibility with Sitecore Experience Editor.

@@ -3,10 +3,10 @@ import {
   LayoutServicePageState,
   useSitecoreContext,
 } from '@sitecore-jss/sitecore-jss-nextjs';
+import { useEffect } from 'react';
+import config from 'temp/config';
 import { init } from '@sitecore/engage';
 import { PosResolver } from 'lib/pos-resolver';
-import { useCallback, useEffect } from 'react';
-import config from 'temp/config';
 
 /**
  * This is the CDP page view component.
@@ -26,7 +26,6 @@ const CdpPageView = (): JSX.Element => {
   /**
    * Creates a page view event using the Sitecore Engage SDK.
    */
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const createPageView = async (page: string, language: string, pageVariantId: string) => {
     // DMEO TEAM CUSTOMIZATION - Only initialize if the environment variables are set
     if (isCdpConfigured) {
@@ -57,10 +56,10 @@ const CdpPageView = (): JSX.Element => {
    * You may also wish to disable in development mode (process.env.NODE_ENV === 'development').
    * By default it is always enabled.
    */
-  const disabled = useCallback(() => {
+  const disabled = () => {
     // DEMO TEAM CUSTOMIZATION - Disable if the environment variables are not set
     return !isCdpConfigured;
-  }, [isCdpConfigured]);
+  };
 
   useEffect(() => {
     // Do not create events in editing or preview mode or if missing route data
@@ -74,7 +73,7 @@ const CdpPageView = (): JSX.Element => {
     const language = route.itemLanguage || config.defaultLanguage;
     const pageVariantId = CdpHelper.getPageVariantId(route.itemId, language, variantId as string);
     createPageView(route.name, language, pageVariantId);
-  }, [createPageView, disabled, pageState, route, variantId]);
+  }, [pageState, route, variantId]);
 
   return <></>;
 };

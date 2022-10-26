@@ -1,11 +1,11 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { News } from 'src/types/news';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import NewsList from '../../components/News/NewsList';
+import { News } from 'src/types/news';
 
 export default {
-  title: 'Components/News/PreviewSearchNewsList',
+  title: 'Components/News/NewsList',
   component: NewsList,
 } as ComponentMeta<typeof NewsList>;
 

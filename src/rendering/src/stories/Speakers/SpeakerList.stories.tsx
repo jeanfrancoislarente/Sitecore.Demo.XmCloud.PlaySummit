@@ -1,11 +1,11 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { Speaker } from 'src/types/speaker';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import SpeakerList, { SpeakerListProps } from '../../components/Speakers/SpeakerList';
+import { Speaker } from 'src/types/speaker';
 
 export default {
-  title: 'Components/Speakers/PreviewSearchSpeakerList',
+  title: 'Components/Speakers/SpeakerList',
   component: SpeakerList,
 } as ComponentMeta<typeof SpeakerList>;
 
