@@ -1,6 +1,7 @@
 import { UserProvider } from '@auth0/nextjs-auth0';
+import MainNavigation from 'components/Navigation/MainNavigation';
 import Head from 'next/head';
-import { PropsWithChildren, useEffect } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import OcProvider from '../../redux/ocProvider';
 import reduxStore from '../../redux/store';
@@ -276,6 +277,273 @@ const footerProps = {
   },
 } as unknown as FooterProps;
 
+const mainNavigationProps = {
+  rendering: {
+    uid: '8ae6e35d-21e3-49a4-9728-29308cf51606',
+    componentName: 'MainNavigation',
+    dataSource: '/sitecore/content/PLAY/playwebsite/Data/Navigation/Header/Main Navigation',
+    params: {
+      CacheClearingBehavior: 'Clear on publish',
+    },
+    fields: {
+      data: {
+        item: {
+          id: '4790380A3F0C443AA954269ECB2D5566',
+          path: '/sitecore/content/PLAY/playwebsite/Data/Config',
+          headerLogo: {
+            jsonValue: {
+              value: {
+                mediaid: '',
+                'stylelabs-content-id': '30940',
+                thumbnailsrc:
+                  'https://playsummit.sitecoresandbox.cloud/api/gateway/30940/thumbnail',
+                src: 'https://playsummit.sitecoresandbox.cloud/api/public/content/83a458a1cb54401cab2308488bbd1031?v=bdb6447b&t=web',
+                'stylelabs-content-type': 'Image',
+                alt: 'PLAY! Summit logo - stacked light grey',
+                height: '113',
+                width: '274',
+              },
+            },
+            alt: 'PLAY! Summit logo - stacked light grey',
+          },
+        },
+        links: {
+          displayName: 'Main Navigation',
+          children: {
+            results: [
+              {
+                displayName: 'Sessions',
+                field: {
+                  jsonValue: {
+                    value: {
+                      class: '',
+                      id: '{68DC89A4-1B04-59A8-9C4E-3B49D6C61052}',
+                      querystring: '',
+                      anchor: '',
+                      target: '',
+                      title: '',
+                      linktype: 'internal',
+                      text: '',
+                      url: '/PLAY/playwebsite/home/sessions',
+                      href: '/sessions',
+                    },
+                  },
+                },
+              },
+              {
+                displayName: 'Speakers',
+                field: {
+                  jsonValue: {
+                    value: {
+                      class: '',
+                      id: '{1F4B781B-F2A5-5647-99DF-C0C369162C4D}',
+                      querystring: '',
+                      anchor: '',
+                      target: '',
+                      title: '',
+                      linktype: 'internal',
+                      text: '',
+                      url: '/PLAY/playwebsite/home/speakers',
+                      href: '/speakers',
+                    },
+                  },
+                },
+              },
+              {
+                displayName: 'Vendors',
+                field: {
+                  jsonValue: {
+                    value: {
+                      class: '',
+                      id: '{774E44E8-0F30-5879-B847-AD233FFB41AA}',
+                      querystring: '',
+                      anchor: '',
+                      target: '',
+                      title: '',
+                      linktype: 'internal',
+                      text: '',
+                      url: '/PLAY/playwebsite/home/vendors',
+                      href: '/vendors',
+                    },
+                  },
+                },
+              },
+              {
+                displayName: 'Sponsors',
+                field: {
+                  jsonValue: {
+                    value: {
+                      class: '',
+                      id: '{66C99E47-7BBF-52D1-B1D7-4662B850744A}',
+                      querystring: '',
+                      anchor: '',
+                      target: '',
+                      title: '',
+                      linktype: 'internal',
+                      text: '',
+                      url: '/PLAY/playwebsite/home/sponsors',
+                      href: '/sponsors',
+                    },
+                  },
+                },
+              },
+              {
+                displayName: 'About Us',
+                field: {
+                  jsonValue: {
+                    value: {
+                      class: '',
+                      id: '{2717574C-48A0-5469-85A8-A332DF71F1E4}',
+                      querystring: '',
+                      anchor: '',
+                      target: '',
+                      title: '',
+                      linktype: 'internal',
+                      text: '',
+                      url: '/PLAY/playwebsite/home/about-us',
+                      href: '/about-us',
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        },
+      },
+    },
+  },
+  modifyComponentProps: 'ƒ modifyComponentProps() {}',
+  componentFactory: 'ƒ componentFactory() {}',
+  fields: {
+    data: {
+      item: {
+        id: '4790380A3F0C443AA954269ECB2D5566',
+        path: '/sitecore/content/PLAY/playwebsite/Data/Config',
+        headerLogo: {
+          jsonValue: {
+            value: {
+              mediaid: '',
+              'stylelabs-content-id': '30940',
+              thumbnailsrc: 'https://playsummit.sitecoresandbox.cloud/api/gateway/30940/thumbnail',
+              src: 'https://playsummit.sitecoresandbox.cloud/api/public/content/83a458a1cb54401cab2308488bbd1031?v=bdb6447b&t=web',
+              'stylelabs-content-type': 'Image',
+              alt: 'PLAY! Summit logo - stacked light grey',
+              height: '113',
+              width: '274',
+            },
+          },
+          alt: 'PLAY! Summit logo - stacked light grey',
+        },
+      },
+      links: {
+        displayName: 'Main Navigation',
+        children: {
+          results: [
+            {
+              displayName: 'Sessions',
+              field: {
+                jsonValue: {
+                  value: {
+                    class: '',
+                    id: '{68DC89A4-1B04-59A8-9C4E-3B49D6C61052}',
+                    querystring: '',
+                    anchor: '',
+                    target: '',
+                    title: '',
+                    linktype: 'internal',
+                    text: '',
+                    url: '/PLAY/playwebsite/home/sessions',
+                    href: '/sessions',
+                  },
+                },
+              },
+            },
+            {
+              displayName: 'Speakers',
+              field: {
+                jsonValue: {
+                  value: {
+                    class: '',
+                    id: '{1F4B781B-F2A5-5647-99DF-C0C369162C4D}',
+                    querystring: '',
+                    anchor: '',
+                    target: '',
+                    title: '',
+                    linktype: 'internal',
+                    text: '',
+                    url: '/PLAY/playwebsite/home/speakers',
+                    href: '/speakers',
+                  },
+                },
+              },
+            },
+            {
+              displayName: 'Vendors',
+              field: {
+                jsonValue: {
+                  value: {
+                    class: '',
+                    id: '{774E44E8-0F30-5879-B847-AD233FFB41AA}',
+                    querystring: '',
+                    anchor: '',
+                    target: '',
+                    title: '',
+                    linktype: 'internal',
+                    text: '',
+                    url: '/PLAY/playwebsite/home/vendors',
+                    href: '/vendors',
+                  },
+                },
+              },
+            },
+            {
+              displayName: 'Sponsors',
+              field: {
+                jsonValue: {
+                  value: {
+                    class: '',
+                    id: '{66C99E47-7BBF-52D1-B1D7-4662B850744A}',
+                    querystring: '',
+                    anchor: '',
+                    target: '',
+                    title: '',
+                    linktype: 'internal',
+                    text: '',
+                    url: '/PLAY/playwebsite/home/sponsors',
+                    href: '/sponsors',
+                  },
+                },
+              },
+            },
+            {
+              displayName: 'About Us',
+              field: {
+                jsonValue: {
+                  value: {
+                    class: '',
+                    id: '{2717574C-48A0-5469-85A8-A332DF71F1E4}',
+                    querystring: '',
+                    anchor: '',
+                    target: '',
+                    title: '',
+                    linktype: 'internal',
+                    text: '',
+                    url: '/PLAY/playwebsite/home/about-us',
+                    href: '/about-us',
+                  },
+                },
+              },
+            },
+          ],
+        },
+      },
+    },
+  },
+  params: {
+    CacheClearingBehavior: 'Clear on publish',
+  },
+};
+
 export const SearchLayout = (props: PropsWithChildren<unknown>): JSX.Element => {
   useEffect(() => {
     // Log a CDP page view on route change
@@ -294,7 +562,13 @@ export const SearchLayout = (props: PropsWithChildren<unknown>): JSX.Element => 
       <UserProvider>
         <Provider store={reduxStore}>
           <OcProvider>
-            <header>{/*<MainNavigation/>*/}</header>
+            <header>
+              {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                <MainNavigation {...mainNavigationProps} />
+              }
+            </header>
             <main>
               <HeaderCdpMessageBar />
               <div className="search-main-container">{props.children}</div>

@@ -1,6 +1,6 @@
-import { DiscoverBase } from './DiscoverBase';
+import { DiscoverEntity } from './DiscoverEntity';
 
-export interface DiscoverSpeaker extends DiscoverBase {
+export interface DiscoverSpeaker extends DiscoverEntity {
   description: string;
   company: string;
   job_title: string;

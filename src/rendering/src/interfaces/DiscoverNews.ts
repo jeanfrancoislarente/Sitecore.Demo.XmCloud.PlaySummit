@@ -1,6 +1,6 @@
-import { DiscoverBase } from './DiscoverBase';
+import { DiscoverEntity } from './DiscoverEntity';
 
-export interface DiscoverNews extends DiscoverBase {
+export interface DiscoverNews extends DiscoverEntity {
   excerpt: string;
   content: string;
   publish_date: string;

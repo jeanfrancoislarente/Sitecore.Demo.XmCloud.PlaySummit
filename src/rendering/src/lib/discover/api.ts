@@ -1,10 +1,14 @@
 import { AxiosDataFetcher } from '@sitecore-jss/sitecore-jss-nextjs';
-import merge from 'lodash.merge';
+import { merge } from 'lodash';
+import { DiscoverResponseBase } from '../../interfaces/DiscoverResponse';
 
-const domainId = process.env.NEXT_PUBLIC_DISCOVER_API_DOMAIN || '229001437';
-const host = process.env.NEXT_PUBLIC_DISCOVER_API_HOST || 'api-staging.rfksrv.com';
+const domainId = process.env.NEXT_PUBLIC_DISCOVER_API_DOMAIN || '';
+const host = process.env.NEXT_PUBLIC_DISCOVER_API_HOST || '';
 
-export const doGet = async (widgetId: string, data: unknown): Promise<unknown> => {
+export const doGet = async <T extends DiscoverResponseBase = DiscoverResponseBase>(
+  widgetId: string,
+  data: unknown
+): Promise<T> => {
   const dataFetcher = new AxiosDataFetcher({ withCredentials: false });
   const response = await dataFetcher.fetch(
     `https://${host}/${domainId}/v1/discover/search-rec`,
@@ -17,22 +21,23 @@ export const doGet = async (widgetId: string, data: unknown): Promise<unknown> =
       widgets: { [widgetId]: widgetData },
     },
   } = response;
+  console.log('>>>>>>>>>>>>>>>>', widgetData);
   return widgetData;
 };
 
 export type DiscoverRequestProps = {
   widgetId: string;
-  keyphrase: string;
+  keyphrase?: string;
   entity?: 'session' | 'vendor' | 'content' | 'sponsor' | 'speaker';
   filters?: { facetId: string; facetValueId: string }[];
   facets?: string[];
   limit?: number;
 };
 
-export const get = async (
+export const get = async <T extends DiscoverResponseBase = DiscoverResponseBase>(
   { widgetId, keyphrase, filters = [], facets = [], entity, limit }: DiscoverRequestProps,
   data: unknown = {}
-): Promise<unknown> => {
+): Promise<T> => {
   console.log(data);
   const types = facets
     .map((facet) => ({
@@ -53,7 +58,7 @@ export const get = async (
       }
       return item;
     });
-  return doGet(
+  return doGet<T>(
     widgetId,
     merge(
       {
@@ -67,7 +72,7 @@ export const get = async (
           },
           // suggestion: ['title_context_aware'],
           content: {},
-          limit: limit ? limit : 10 ,
+          limit: limit ? limit : 10,
           offset: 0,
           sort: {
             choices: true,

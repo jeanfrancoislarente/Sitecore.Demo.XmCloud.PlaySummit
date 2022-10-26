@@ -1,6 +1,6 @@
-import { DiscoverBase } from './DiscoverBase';
+import { DiscoverEntity } from './DiscoverEntity';
 
-export interface DiscoverSponsor extends DiscoverBase {
+export interface DiscoverSponsor extends DiscoverEntity {
   description: string;
   level: string;
   activities: string[];

@@ -1,5 +1,8 @@
 import { useQueries } from '@tanstack/react-query';
 import merge from 'lodash.merge';
+import { useMemo } from 'react';
+import { DiscoverEntity } from '../interfaces/DiscoverEntity';
+import { DiscoverResponse } from '../interfaces/DiscoverResponse';
 import * as api from '../lib/discover/api';
 import { DiscoverRequestProps } from '../lib/discover/api';
 
@@ -7,13 +10,17 @@ export type QUERY_TYPES = 'session' | 'speaker' | 'content' | 'vendor' | 'sponso
 export type CustomQueries = {
   [key in QUERY_TYPES]: Omit<DiscoverRequestProps, 'entity' | 'widgetId'>;
 };
+export type UseDiscoverQueriesResult<T extends DiscoverResponse<DiscoverEntity>[]> = {
+  isLoading: boolean;
+  result: T;
+};
 
-const useDiscoverQueries = <T>(
+const useDiscoverQueries = <T extends DiscoverResponse<DiscoverEntity>[]>(
   queriesFor: QUERY_TYPES[],
   props: Omit<DiscoverRequestProps, 'entity'>,
   custom?: CustomQueries
-): T => {
-  const result = useQueries({
+): UseDiscoverQueriesResult<T> => {
+  const results = useQueries({
     queries: queriesFor.map((entity) => ({
       queryKey: [entity, JSON.stringify(props)],
       queryFn: () =>
@@ -26,9 +33,13 @@ const useDiscoverQueries = <T>(
     })),
   });
 
+  const result = useMemo(() => results.map(({ data }) => data).flat(), [results]);
+
+  const isLoading = !!results.find((q) => q.isFetching) && result.length === 0;
+
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  return queriesFor.map((_, index) => result[index]);
+  // @ts-ignore This should be fixed finding a way to type dynamically useQueries.
+  return { isLoading, result };
 };
 
 export default useDiscoverQueries;

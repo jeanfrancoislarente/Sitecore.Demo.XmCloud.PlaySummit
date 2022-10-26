@@ -1,4 +1,4 @@
-export interface DiscoverBase {
+export interface DiscoverEntity {
   id: string;
   image_url: string;
   name: string;

@@ -1,5 +1,6 @@
 import useDiscoverQueries from '../../hooks/useDiscoverQueries';
 import { DiscoverNews } from '../../interfaces/DiscoverNews';
+import { DiscoverResponse } from '../../interfaces/DiscoverResponse';
 import { DiscoverSession } from '../../interfaces/DiscoverSession';
 import { DiscoverSpeaker } from '../../interfaces/DiscoverSpeaker';
 import PreviewSearchNewsList from './PreviewSearchNewsList';
@@ -7,39 +8,34 @@ import PreviewSearchSessionList from './PreviewSearchSessionList';
 import PreviewSearchSpeakerList from './PreviewSearchSpeakerList';
 import SuggestionList from './SuggestionList';
 
-export type Result = {
-  title?: string;
-  list: unknown[];
-};
-
 export type PreviewSearchContainerProps = {
   keyphrase?: string;
   closePopup?: () => void;
-};
-
-export type PreviewSearchProps = {
-  sessions: DiscoverSession[];
-  speakers: DiscoverSpeaker[];
-  news: DiscoverNews[];
-  suggestions: Result;
 };
 
 const PreviewSearchContainer = ({
   keyphrase,
   closePopup,
 }: PreviewSearchContainerProps): JSX.Element => {
-  const [news, sessions, speakers, suggestions] = useDiscoverQueries<
-    [DiscoverNews[], DiscoverSession[], DiscoverSpeaker[], Result]
+  const {
+    result: [news, sessions, speakers, suggestions],
+  } = useDiscoverQueries<
+    [
+      DiscoverResponse<DiscoverNews>,
+      DiscoverResponse<DiscoverSession>,
+      DiscoverResponse<DiscoverSpeaker>,
+      DiscoverResponse<never>
+    ]
   >(['content', 'session', 'speaker', 'free'], {
     keyphrase,
     limit: 4,
     widgetId: 'rfkid_6',
   });
 
-  const suggestionsAvailable = false, // suggestions && suggestions.data?.content?.length > 0, // TODO: Review suggestions
-    sessionsAvailable = sessions && sessions.data?.content?.length > 0,
-    speakersAvailable = speakers && speakers.data?.content?.length > 0,
-    newsAvailable = news && news.data?.content?.length > 0;
+  const suggestionsAvailable = suggestions && suggestions.content.length > 0, // TODO: Review suggestions
+    sessionsAvailable = sessions && sessions.content.length > 0,
+    speakersAvailable = speakers && speakers.content.length > 0,
+    newsAvailable = news && news.content.length > 0;
 
   return (
     (suggestionsAvailable || sessionsAvailable || speakersAvailable || newsAvailable) && (
@@ -47,26 +43,26 @@ const PreviewSearchContainer = ({
         {suggestionsAvailable && (
           <SuggestionList
             title={`Do you mean?`}
-            list={suggestions.data.content}
+            list={suggestions.content}
             closePopup={closePopup}
           />
         )}
         {sessionsAvailable && (
           <PreviewSearchSessionList
             title={`Sessions`}
-            list={sessions.data.content}
+            list={sessions.content}
             closePopup={closePopup}
           />
         )}
         {speakersAvailable && (
           <PreviewSearchSpeakerList
             title={`Speakers`}
-            list={speakers.data.content}
+            list={speakers.content}
             closePopup={closePopup}
           />
         )}
         {newsAvailable && (
-          <PreviewSearchNewsList title={`News`} list={news.data.content} closePopup={closePopup} />
+          <PreviewSearchNewsList title={`News`} list={news.content} closePopup={closePopup} />
         )}
       </div>
     )
@@ -74,14 +70,3 @@ const PreviewSearchContainer = ({
 };
 
 export default PreviewSearchContainer;
-
-
-
-
-
-
-
-
-
-
-
