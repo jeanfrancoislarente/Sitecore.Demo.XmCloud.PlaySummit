@@ -29,12 +29,7 @@
   border: 1px solid gray;
 }
 
-.preview-search-content-container
-  .item-grid.sessions-grid
-  .grid-content
-  .grid-item
-  .item-details
-  .item-title {
+.preview-search-content-container .item-grid.sessions-grid .grid-content .grid-item .item-details .item-title {
   font-size: 0.8rem;
   line-height: 1rem;
 }

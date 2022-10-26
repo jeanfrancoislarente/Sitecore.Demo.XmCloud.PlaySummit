@@ -1,6 +1,7 @@
 .preview-search-content-popup {
   --tw-bg-opacity: 1;
   --tw-border-opacity: 1;
+
   background-color: rgb(229 229 229 / var(--tw-bg-opacity));
   border-color: rgb(204 204 204 / var(--tw-border-opacity));
   display: flex;
@@ -9,11 +10,11 @@
 }
 
 .preview-search-content-container {
-  bottom: 0px;
+  bottom: 0;
   overflow-x: hidden;
   overflow-y: scroll;
   position: fixed;
-  right: 0px;
+  right: 0;
   top: 123px;
   width: 100%;
 }
@@ -26,4 +27,3 @@
   padding-right: 1.25rem;
   width: 100%;
 }
-

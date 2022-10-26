@@ -12,12 +12,7 @@
   border: 1px solid gray;
 }
 
-.preview-search-content-container
-  .preview-search-content
-  .item-grid
-  .grid-content
-  .grid-item
-  .item-details {
+.preview-search-content-container .preview-search-content .item-grid .grid-content .grid-item .item-details {
   display: flex;
   flex-direction: column;
   padding: 1rem;
@@ -26,7 +21,9 @@
 .preview-search-content-container .preview-search-content .news-date {
   font-size: 0.75rem;
   line-height: 1rem;
+
   --tw-text-opacity: 1;
+
   color: rgb(179 179 179 / var(--tw-text-opacity));
 }
 

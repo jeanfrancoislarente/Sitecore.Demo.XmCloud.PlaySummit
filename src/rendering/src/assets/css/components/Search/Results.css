@@ -1,9 +1,3 @@
 .search-results {
   @apply flex flex-col;
-
-  .search-results-filters {
-  }
-
-  .search-results-content {
-  }
 }

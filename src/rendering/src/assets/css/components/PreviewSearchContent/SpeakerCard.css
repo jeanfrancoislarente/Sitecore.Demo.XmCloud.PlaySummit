@@ -9,7 +9,9 @@
 .preview-search-content-container .icon {
   margin-right: 0.5rem;
   display: inline;
+
   --tw-text-opacity: 1;
+
   color: rgb(35 35 35 / var(--tw-text-opacity));
 }
 
@@ -26,10 +28,7 @@
   border: 1px solid gray;
 }
 
-.preview-search-content-container
-  .preview-search-content
-  .row-item
-  .item-details.item-details-left {
+.preview-search-content-container .preview-search-content .row-item .item-details.item-details-left {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   padding-top: 0.5rem;
@@ -41,4 +40,3 @@
   margin-top: 0.3rem;
   line-height: 1rem;
 }
-

@@ -24,10 +24,7 @@
   overflow: unset;
 }
 
-.preview-search-content-container
-  .preview-search-content
-  .news-list
-  .grid-content.news-list-content {
+.preview-search-content-container .preview-search-content .news-list .grid-content.news-list-content {
   padding: 10px 0 0 0;
   margin: 0;
 }
