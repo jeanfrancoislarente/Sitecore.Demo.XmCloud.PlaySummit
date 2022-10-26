@@ -45,15 +45,15 @@ const PreviewSearch = (): JSX.Element => {
 
   return (
     <div>
-      <div className={`preview-search-content-container`}>
-        <div className={`preview-search-content`} ref={popupRef}>
+      <div className="preview-search-content-container">
+        <div className="preview-search-content" ref={popupRef}>
           {open && <PreviewSearchContainer keyphrase={keyphrase} closePopup={closePopup} />}
         </div>
       </div>
       <div ref={inputRef}>
         <SearchInput
           placeholder="Search content"
-          redirectUrl={`search`}
+          redirectUrl="search"
           keyphrase={keyphrase}
           setSearchString={changeKeyphrase}
           onFocus={onFocus}

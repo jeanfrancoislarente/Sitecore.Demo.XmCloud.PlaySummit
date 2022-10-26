@@ -43,30 +43,30 @@ const PreviewSearchContainer = ({
 
   return (
     (suggestionsAvailable || sessionsAvailable || speakersAvailable || newsAvailable) && (
-      <div className={`preview-search-content-popup`}>
+      <div className="preview-search-content-popup">
         {suggestionsAvailable && (
           <SuggestionList
-            title={`Do you mean?`}
+            title="Do you mean?"
             list={suggestions.data.content}
             closePopup={closePopup}
           />
         )}
         {sessionsAvailable && (
           <PreviewSearchSessionList
-            title={`Sessions`}
+            title="Sessions"
             list={sessions.data.content}
             closePopup={closePopup}
           />
         )}
         {speakersAvailable && (
           <PreviewSearchSpeakerList
-            title={`Speakers`}
+            title="Speakers"
             list={speakers.data.content}
             closePopup={closePopup}
           />
         )}
         {newsAvailable && (
-          <PreviewSearchNewsList title={`News`} list={news.data.content} closePopup={closePopup} />
+          <PreviewSearchNewsList title="News" list={news.data.content} closePopup={closePopup} />
         )}
       </div>
     )

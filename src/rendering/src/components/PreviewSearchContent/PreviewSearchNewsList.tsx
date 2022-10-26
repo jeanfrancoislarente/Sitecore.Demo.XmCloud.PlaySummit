@@ -18,19 +18,15 @@ const PreviewSearchNewsList = (props: NewsListProps): JSX.Element => {
   };
 
   return (
-    <section className={`news-list item-grid sessions-grid`}>
-      <span className={`news-list-title`}>
+    <section className="news-list item-grid sessions-grid">
+      <span className="news-list-title">
         {title}
-        <a className={`view-all`} onClick={viewAllClick}>
+        <a className="view-all" onClick={viewAllClick}>
           View All
         </a>
       </span>
-      <div className={`grid-content news-list-content`}>
-        {list.length > 0 &&
-          list.map((item) => (
-            // eslint-disable-next-line react/jsx-key
-            <NewsCard {...item} />
-          ))}
+      <div className="grid-content news-list-content">
+        {list.length > 0 && list.map((item) => <NewsCard key={item.id} {...item} />)}
       </div>
     </section>
   );

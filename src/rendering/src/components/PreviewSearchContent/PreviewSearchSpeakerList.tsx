@@ -18,19 +18,15 @@ const PreviewSearchSpeakerList = (props: SpeakerListProps): JSX.Element => {
   };
 
   return (
-    <section className={`speaker-list item-grid`}>
-      <span className={`speaker-list-title`}>
+    <section className="speaker-list item-grid">
+      <span className="speaker-list-title">
         {title}
-        <a className={`view-all`} onClick={viewAllClick}>
+        <a className="view-all" onClick={viewAllClick}>
           View All
         </a>
       </span>
-      <div className={`grid-content speaker-list-content`}>
-        {list.length > 0 &&
-          list.map((item) => (
-            // eslint-disable-next-line react/jsx-key
-            <SpeakerCard {...item} />
-          ))}
+      <div className="grid-content speaker-list-content">
+        {list.length > 0 && list.map((item) => <SpeakerCard key={item.id} {...item} />)}
       </div>
     </section>
   );

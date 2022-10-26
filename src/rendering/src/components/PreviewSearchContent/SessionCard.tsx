@@ -1,6 +1,5 @@
 import { faCalendar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Text } from '@sitecore-jss/sitecore-jss-nextjs';
 import Link from 'next/link';
 
 export type SessionCardProps = {
@@ -18,18 +17,18 @@ const SessionCard = (props: SessionCardProps): JSX.Element => {
   const { image_url, name, url, days, speakers, start_time } = props;
 
   const date = days && days.length > 0 && start_time && (
-    <p className={`session-info`}>
+    <p className="session-info">
       <span>
-        <FontAwesomeIcon className={`icon`} icon={faCalendar} />
+        <FontAwesomeIcon className="icon" icon={faCalendar} />
       </span>
       {`${days.join(' - ')} at ${start_time}`}
     </p>
   );
 
   const speaker = speakers && speakers.length > 0 && (
-    <p className={`session-info`}>
+    <p className="session-info">
       <span>
-        <FontAwesomeIcon className={`icon`} icon={faUser} />
+        <FontAwesomeIcon className="icon" icon={faUser} />
       </span>
       {speakers.join(' - ')}
     </p>
@@ -37,10 +36,10 @@ const SessionCard = (props: SessionCardProps): JSX.Element => {
 
   return (
     <Link href={url}>
-      <a className={`grid-item`}>
-        <div className={`image-hover-zoom`} style={{ backgroundImage: `url(${image_url})` }}></div>
-        <div className={`item-details item-details-left`}>
-          <Text tag="div" className={`item-title`} field={{ value: name }} />
+      <a className="grid-item">
+        <div className="image-hover-zoom" style={{ backgroundImage: `url(${image_url})` }}></div>
+        <div className="item-details item-details-left">
+          <div className="item-title">{name}</div>
           {speaker}
           {date}
         </div>

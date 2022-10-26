@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Text } from '@sitecore-jss/sitecore-jss-nextjs';
 
 export type NewsCardProps = {
   id: string;
@@ -14,12 +13,12 @@ const SessionCard = (props: NewsCardProps): JSX.Element => {
 
   return (
     <Link href={url}>
-      <a className={`grid-item news-item`}>
-        <div className={`item-details item-details-left`}>
-          <Text tag="div" className={`item-title`} field={{ value: name }} />
-          <span className={`news-date`}>{new Date(publish_date).toLocaleString()}</span>
+      <a className="grid-item news-item">
+        <div className="item-details item-details-left">
+          <div className="item-title">{name}</div>
+          <span className="news-date">{new Date(publish_date).toLocaleString()}</span>
         </div>
-        <img className={`news-image`} src={image_url} alt={`News image`} height="100" width="100" />
+        <img className="news-image" src={image_url} alt="News image" height="100" width="100" />
       </a>
     </Link>
   );

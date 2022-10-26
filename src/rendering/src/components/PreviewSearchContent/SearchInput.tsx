@@ -78,11 +78,11 @@ const SearchInput = ({
           placeholder={placeholder}
           onKeyUp={keyListener}
           autoComplete="off"
-          className={`search-input-play`}
+          className="search-input-play"
         />
       )}
       <FontAwesomeIcon
-        className={`search-play-icon`}
+        className="search-play-icon"
         icon={faSearch}
         onClick={handleSearchIconClick}
       />

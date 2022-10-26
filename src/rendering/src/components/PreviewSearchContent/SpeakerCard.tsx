@@ -36,10 +36,10 @@ const SessionCard = (props: SpeakerCardProps): JSX.Element => {
 
   return (
     <Link href={url}>
-      <a className={`row-item`}>
-        <img src={image_url} width="150" alt={`Speaker image`} />
-        <div className={`item-details item-details-left`}>
-          <Text tag="div" className={`item-title`} field={{ value: name }} />
+      <a className="row-item">
+        <img src={image_url} width="150" alt="Speaker image" />
+        <div className="item-details item-details-left">
+          <div className="item-title">{name}</div>
           {jobTitle}
           {companyValue}
           {locationValue}
