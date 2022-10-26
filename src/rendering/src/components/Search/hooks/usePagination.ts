@@ -49,7 +49,7 @@ const usePagination = ({
     if (page > totalPages) {
       setPage(totalPages);
     }
-  }, [page, totalPages]);
+  }, [page, totalPages, setPage]);
 
   useEffect(() => {
     setPages(generatePages(totalPages, page));
