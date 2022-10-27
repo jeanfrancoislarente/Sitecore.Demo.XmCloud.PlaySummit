@@ -4,7 +4,10 @@ export type DiscoverResponseFacet = {
   count: number;
 };
 export interface DiscoverResponseBase {
-  content: unknown[];
+  content?: unknown[];
+  total_item: number;
+  limit: number;
+  offset: number;
   facet?: {
     [key in string]: {
       label: string;
@@ -13,5 +16,5 @@ export interface DiscoverResponseBase {
   };
 }
 export interface DiscoverResponse<T extends unknown> extends DiscoverResponseBase {
-  content: T[];
+  content?: T[];
 }

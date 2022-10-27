@@ -2,7 +2,9 @@ import { HeaderProps } from '../../components/Navigation/Header';
 import { FooterProps } from '../../components/Navigation/Footer';
 import HeroSectionCta from '../../components/PageContent/HeroSectionCta';
 import MainNavigation from '../../components/Navigation/MainNavigation';
-import { PreviewSearchProps } from 'components/PreviewSearchContent/PreviewSearch';
+import { DiscoverNews } from '../../interfaces/DiscoverNews';
+import { DiscoverSession } from '../../interfaces/DiscoverSession';
+import { DiscoverSpeaker } from '../../interfaces/DiscoverSpeaker';
 
 export const mockMainNavigationFields = {
   data: {
@@ -497,7 +499,7 @@ export const mockPreviewSearchFields = {
         speakers: ['Peter Siegels'],
         start_time: '6 pm',
       },
-    ],
+    ] as unknown as DiscoverSession[],
   },
   speakers: {
     title: 'Speakers',
@@ -522,7 +524,7 @@ export const mockPreviewSearchFields = {
         company: 'Sitecore',
         job_title: 'Developer',
       },
-    ],
+    ] as unknown as DiscoverSpeaker[],
   },
   news: {
     title: 'News',
@@ -551,9 +553,9 @@ export const mockPreviewSearchFields = {
         url: '#',
         publish_date: 'Thu, July 29, 2021',
       },
-    ],
+    ] as unknown as DiscoverNews[],
   },
-} as unknown as PreviewSearchProps;
+};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const mockComponentFactory = function (componentName: string): any {

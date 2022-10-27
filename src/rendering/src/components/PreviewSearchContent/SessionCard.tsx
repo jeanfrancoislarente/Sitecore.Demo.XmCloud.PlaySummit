@@ -1,6 +1,7 @@
 import { faCalendar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import { getAbsoluteUrlPath } from '../../lib/discover/utils';
 
 export type SessionCardProps = {
   id: string;
@@ -35,7 +36,7 @@ const SessionCard = (props: SessionCardProps): JSX.Element => {
   );
 
   return (
-    <Link href={url}>
+    <Link href={getAbsoluteUrlPath(url)}>
       <a className="grid-item">
         <div className="image-hover-zoom" style={{ backgroundImage: `url(${image_url})` }}></div>
         <div className="item-details item-details-left">

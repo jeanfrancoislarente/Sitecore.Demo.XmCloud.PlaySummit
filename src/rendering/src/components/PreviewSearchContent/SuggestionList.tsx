@@ -4,18 +4,19 @@ export type Suggestion = {
   id?: string;
   text?: string;
   url?: string;
+  closePopup: () => void;
 };
 
 export type SuggestionList = {
   title?: string;
-  list: Suggestion[];
+  list?: Suggestion[];
   closePopup: () => void;
 };
 
 const Suggestion = (props: Suggestion): JSX.Element => {
-  const { url, text } = props;
+  const { url, text, closePopup } = props;
   return (
-    <Link href={url}>
+    <Link href={url} onClick={closePopup}>
       <a className="suggestion-item">
         <span>{text}</span>
       </a>
@@ -24,13 +25,20 @@ const Suggestion = (props: Suggestion): JSX.Element => {
 };
 
 const SuggestionList = (props: SuggestionList): JSX.Element => {
-  const { title, list } = props;
+  const { title, list = [], closePopup } = props;
 
   return (
     <section className="suggestion-list">
       <span className="suggestion-list-title">{title}</span>
       <div className="suggestion-container">
-        {list.length > 0 && list.map((item) => <Suggestion key={item.id} {...item}></Suggestion>)}
+        {list.length > 0 && list.map((item) => (
+            <Suggestion
+              key={item.id}
+              {...item}
+              url={`/search?q=${item.text}`}
+              closePopup={closePopup}
+            />
+          ))}
       </div>
     </section>
   );

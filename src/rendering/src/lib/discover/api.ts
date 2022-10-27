@@ -2,8 +2,8 @@ import { AxiosDataFetcher } from '@sitecore-jss/sitecore-jss-nextjs';
 import { merge } from 'lodash';
 import { DiscoverResponseBase } from '../../interfaces/DiscoverResponse';
 
-const domainId = process.env.NEXT_PUBLIC_DISCOVER_API_DOMAIN || '';
-const host = process.env.NEXT_PUBLIC_DISCOVER_API_HOST || '';
+const domainId = process.env.NEXT_PUBLIC_SEARCH_API_DOMAIN || '';
+const host = process.env.NEXT_PUBLIC_SEARCH_API_HOST || '';
 
 export const doGet = async <T extends DiscoverResponseBase = DiscoverResponseBase>(
   widgetId: string,
@@ -21,7 +21,6 @@ export const doGet = async <T extends DiscoverResponseBase = DiscoverResponseBas
       widgets: { [widgetId]: widgetData },
     },
   } = response;
-  console.log('>>>>>>>>>>>>>>>>', widgetData);
   return widgetData;
 };
 
@@ -38,7 +37,6 @@ export const get = async <T extends DiscoverResponseBase = DiscoverResponseBase>
   { widgetId, keyphrase, filters = [], facets = [], entity, limit }: DiscoverRequestProps,
   data: unknown = {}
 ): Promise<T> => {
-  console.log(data);
   const types = facets
     .map((facet) => ({
       name: facet,
@@ -61,6 +59,7 @@ export const get = async <T extends DiscoverResponseBase = DiscoverResponseBase>
   return doGet<T>(
     widgetId,
     merge(
+      {},
       {
         // rfk_flags: ['-cache'],
         entity: entity ?? undefined,
@@ -70,7 +69,6 @@ export const get = async <T extends DiscoverResponseBase = DiscoverResponseBase>
             sort: { name: 'count', order: 'desc' },
             types: types.length > 0 ? types : undefined,
           },
-          // suggestion: ['title_context_aware'],
           content: {},
           limit: limit ? limit : 10,
           offset: 0,
@@ -79,8 +77,8 @@ export const get = async <T extends DiscoverResponseBase = DiscoverResponseBase>
           },
         },
         widget: { rfkids: [widgetId] },
-      }
-      // data
+      },
+      data
     )
   );
 };

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { getAbsoluteUrlPath } from '../../lib/discover/utils';
 
 export type NewsCardProps = {
   id: string;
@@ -12,7 +13,7 @@ const SessionCard = (props: NewsCardProps): JSX.Element => {
   const { image_url, name, url, publish_date } = props;
 
   return (
-    <Link href={url}>
+    <Link href={getAbsoluteUrlPath(url)}>
       <a className="grid-item news-item">
         <div className="item-details item-details-left">
           <div className="item-title">{name}</div>

@@ -9,9 +9,12 @@ import { Speaker } from '../../types/speaker';
 import { Sponsor } from '../../types/sponsor';
 import { Vendor } from '../../types/vendor';
 
-export const getRelativeUrl = (url: string): string => url.slice(0, 1);
+export const getAbsoluteUrlPath = (url: string): string => {
+  const [, path] = String(url).match(/^https?:\/\/[^/]+(.+)$/) || [];
+  return path || url;
+};
 export const getUrlFromName = (type: string, name: string): string =>
-  `${type}/${name.replaceAll(' ', '-')}`;
+  `/${type}/${name.replaceAll(' ', '-')}`;
 
 export const sessionAdapter = ({
   name,
@@ -25,7 +28,7 @@ export const sessionAdapter = ({
 }: DiscoverSession): GraphQLSession => ({
   name: { value: name },
   premium: { value: is_premium },
-  url: { path: getRelativeUrl(url) },
+  url: { path: getAbsoluteUrlPath(url) },
   imageTransformation: {
     value: image_url,
   },

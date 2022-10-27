@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { faBuilding, faMapMarkerAlt, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import InfoText from '../NonSitecore/InfoText';
+import { getAbsoluteUrlPath } from '../../lib/discover/utils';
 
 export type SpeakerCardProps = {
   id: string;
@@ -34,7 +35,7 @@ const SessionCard = (props: SpeakerCardProps): JSX.Element => {
   );
 
   return (
-    <Link href={url}>
+    <Link href={getAbsoluteUrlPath(url)}>
       <a className="row-item">
         <img src={image_url} width="150" alt="Speaker image" />
         <div className="item-details item-details-left">

@@ -1,8 +1,6 @@
 import { useQueries } from '@tanstack/react-query';
-import merge from 'lodash.merge';
 import { useMemo } from 'react';
-import { DiscoverEntity } from '../interfaces/DiscoverEntity';
-import { DiscoverResponse } from '../interfaces/DiscoverResponse';
+import { DiscoverResponseBase } from '../interfaces/DiscoverResponse';
 import * as api from '../lib/discover/api';
 import { DiscoverRequestProps } from '../lib/discover/api';
 
@@ -10,12 +8,12 @@ export type QUERY_TYPES = 'session' | 'speaker' | 'content' | 'vendor' | 'sponso
 export type CustomQueries = {
   [key in QUERY_TYPES]: Omit<DiscoverRequestProps, 'entity' | 'widgetId'>;
 };
-export type UseDiscoverQueriesResult<T extends DiscoverResponse<DiscoverEntity>[]> = {
+export type UseDiscoverQueriesResult<T extends DiscoverResponseBase[]> = {
   isLoading: boolean;
   result: T;
 };
 
-const useDiscoverQueries = <T extends DiscoverResponse<DiscoverEntity>[]>(
+const useDiscoverQueries = <T extends DiscoverResponseBase[]>(
   queriesFor: QUERY_TYPES[],
   props: Omit<DiscoverRequestProps, 'entity'>,
   custom?: CustomQueries
@@ -26,7 +24,7 @@ const useDiscoverQueries = <T extends DiscoverResponse<DiscoverEntity>[]>(
       queryFn: () =>
         api.get(
           { entity: entity === 'free' ? undefined : entity, ...props },
-          custom ? merge({}, {}, custom[entity]) : props
+          custom ? custom[entity] : undefined
         ),
       keepPreviousData: true,
       refetchOnWindowFocus: false,
