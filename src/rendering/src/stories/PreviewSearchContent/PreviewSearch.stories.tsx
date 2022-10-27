@@ -2,6 +2,10 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { PreviewSearchPopup } from '../../components/PreviewSearchContent/PreviewSearchContainer';
+import { DiscoverNews } from '../../interfaces/DiscoverNews';
+import { DiscoverResponse, DiscoverResponseBase } from '../../interfaces/DiscoverResponse';
+import { DiscoverSession } from '../../interfaces/DiscoverSession';
+import { DiscoverSpeaker } from '../../interfaces/DiscoverSpeaker';
 import { mockPreviewSearchFields } from '../Pages/PageStoriesCommon';
 
 export default {
@@ -22,8 +26,8 @@ const {
 } = mockPreviewSearchFields;
 Default.args = {
   resultsUrl: '/search?q=test',
-  news: { content: news },
-  sessions: { content: sessions },
-  speakers: { content: speakers },
-  suggestions: { content: suggestions },
+  news: { content: news, total_item: 10 } as DiscoverResponse<DiscoverNews>,
+  sessions: { content: sessions, total_item: 10 } as DiscoverResponse<DiscoverSession>,
+  speakers: { content: speakers, total_item: 10 } as DiscoverResponse<DiscoverSpeaker>,
+  suggestions: { content: suggestions, total_item: 10 } as DiscoverResponseBase,
 };

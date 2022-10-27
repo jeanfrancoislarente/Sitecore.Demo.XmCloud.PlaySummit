@@ -1,3 +1,5 @@
+import { DiscoverEntity } from './DiscoverEntity';
+
 export type DiscoverResponseFacet = {
   id: string;
   text: string;
@@ -15,6 +17,6 @@ export interface DiscoverResponseBase {
     };
   };
 }
-export interface DiscoverResponse<T extends unknown> extends DiscoverResponseBase {
+export interface DiscoverResponse<T extends DiscoverEntity> extends DiscoverResponseBase {
   content?: T[];
 }
