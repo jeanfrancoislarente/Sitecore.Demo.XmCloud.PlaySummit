@@ -1,7 +1,7 @@
 /**
  * This Layout is needed for Starter Kit.
  */
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import React, { useEffect } from 'react'; // DEMO TEAM CUSTOMIZATION - Log page views in CDP
 import Head from 'next/head';
 // DEMO TEAM CUSTOMIZATION - Add LayoutServicePageState
@@ -13,6 +13,7 @@ import {
   LayoutServicePageState,
 } from '@sitecore-jss/sitecore-jss-nextjs';
 import Scripts from 'src/Scripts';
+import { queryClient } from './helpers/DiscoverHelper';
 // DEMO TEAM CUSTOMIZATION - CDP integration
 import { logViewEvent } from './services/CdpService';
 import HeaderCdpMessageBar from './components/HeaderCdpMessageBar';
@@ -31,8 +32,6 @@ interface RouteFields {
   Title?: Field;
   pageTitle?: Field; // DEMO TEAM CUSTOMIZATION - Add field
 }
-
-const queryClient = new QueryClient();
 
 const Layout = ({ layoutData }: LayoutProps): JSX.Element => {
   const { route, context } = layoutData.sitecore; // DEMO TEAM CUSTOMIZATION - Add context to destructuring

@@ -1,13 +1,13 @@
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useContext, useState, FC } from 'react';
 import EntityTab from './EntityTab';
 import EntityTabContent from './EntityTabContent';
-import { SearchTabContext } from './SearchTabProvider';
+import { SearchContext } from './SearchProvider';
 
 export type Tab = {
   id: string;
   name: string;
   color?: string;
-  Component: () => JSX.Element;
+  Component: FC;
 };
 
 export type EntityTabsProps = {
@@ -18,7 +18,7 @@ export type EntityTabsProps = {
 };
 
 const EntityTabs = (props: EntityTabsProps): JSX.Element => {
-  const { totals } = useContext(SearchTabContext);
+  const { totals } = useContext(SearchContext);
   const themeClass = props.theme ? `entity-tabs-${props.theme}` : '';
   const [activeTab, setActiveTab] = useState<Tab['id']>(() => props.defaultSelected);
   const onSelectTab = useCallback((id: Tab['id']) => {
@@ -43,7 +43,7 @@ const EntityTabs = (props: EntityTabsProps): JSX.Element => {
             key={id}
             id={id}
             active={activeTab === id}
-            name={`${name}${totals[id] >= 0 ? `(${totals[id]})` : ''}`}
+            name={`${name}${totals[id] >= 0 ? ` (${totals[id]})` : ''}`}
             color={color}
             onSelect={onSelectTab}
           />

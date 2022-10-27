@@ -1,14 +1,12 @@
 import { Image, Text } from '@sitecore-jss/sitecore-jss-nextjs';
-import { PaginationProps } from 'components/Search/Pagination';
 import Link from 'next/link';
-import { Vendor } from '../../types/vendor';
-import { FacetsProps } from './Facets';
-import ResultsTab from './ResultsTab';
+import { vendorAdapter } from '../../helpers/DiscoverHelper';
+import { DiscoverSponsor } from '../../interfaces/DiscoverSponsor';
+import ResultsTab, { ResultsTabProps } from './ResultsTab';
 
-export type VendorResultsTabProps = FacetsProps &
-  PaginationProps & {
-    items: Vendor[];
-  };
+export type VendorResultsTabProps = ResultsTabProps & {
+  items: DiscoverSponsor[];
+};
 
 const VendorResultsTab = (props: VendorResultsTabProps): JSX.Element => {
   return (
@@ -17,13 +15,17 @@ const VendorResultsTab = (props: VendorResultsTabProps): JSX.Element => {
       filters={props.filters}
       productsPerPage={props.productsPerPage}
       currentPage={props.currentPage}
+      onResultsPerPageChange={props.onResultsPerPageChange}
+      onSortChange={props.onSortChange}
+      sort={props.sort}
+      sortOptions={props.sortOptions}
       onPageChange={props.onPageChange}
       totalItems={props.totalItems}
       onClearFilters={props.onClearFilters}
       onFacetValueClick={props.onFacetValueClick}
       onFilterClick={props.onFilterClick}
     >
-      {props.items.map((vendor, index) => (
+      {props.items.map(vendorAdapter).map((vendor, index) => (
         <Link key={index} href={vendor.url} passHref>
           <a className="grid-item">
             <Image

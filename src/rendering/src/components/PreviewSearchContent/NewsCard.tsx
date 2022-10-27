@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getAbsoluteUrlPath } from '../../lib/discover/utils';
+import { getAbsoluteUrlPath } from '../../helpers/DiscoverHelper';
 
 export type NewsCardProps = {
   id: string;

@@ -1,9 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { FiltersProps } from 'components/Search/Filters';
 import React from 'react';
 
 import EntityTabs from '../../components/Search/EntityTabs';
-import SearchTabProvider from '../../components/Search/SearchTabProvider';
+import SearchProvider from '../../components/Search/SearchProvider';
 
 export default {
   title: 'Components/Search/EntityTabs',
@@ -11,9 +10,9 @@ export default {
 } as ComponentMeta<typeof EntityTabs>;
 
 const Template: ComponentStory<typeof EntityTabs> = (args) => (
-  <SearchTabProvider filters={{} as FiltersProps['options']}>
+  <SearchProvider>
     <EntityTabs {...args} />
-  </SearchTabProvider>
+  </SearchProvider>
 );
 
 export const Default = Template.bind({});

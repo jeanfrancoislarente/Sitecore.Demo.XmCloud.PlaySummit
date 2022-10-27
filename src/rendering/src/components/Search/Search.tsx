@@ -1,16 +1,12 @@
-import { UserProvider } from '@auth0/nextjs-auth0';
+import { QueryClientProvider } from '@tanstack/react-query';
 import MainNavigation from 'components/Navigation/MainNavigation';
 import Head from 'next/head';
 import React, { PropsWithChildren, useEffect } from 'react';
-import { Provider } from 'react-redux';
-import OcProvider from '../../redux/ocProvider';
-import reduxStore from '../../redux/store';
-// import { DiscoverService } from '../../services/DiscoverService';
+import { queryClient } from '../../helpers/DiscoverHelper';
 import { logViewEvent } from '../../services/CdpService';
 import HeaderCdpMessageBar from '../HeaderCdpMessageBar';
 import Footer, { FooterProps } from '../Navigation/Footer';
 
-// DiscoverService();
 //
 const footerProps = {
   fields: {
@@ -544,7 +540,7 @@ const mainNavigationProps = {
   },
 };
 
-export const SearchLayout = (props: PropsWithChildren<unknown>): JSX.Element => {
+export const SearchLayout = (props: PropsWithChildren): JSX.Element => {
   useEffect(() => {
     // Log a CDP page view on route change
     const pushState = history.pushState;
@@ -559,26 +555,22 @@ export const SearchLayout = (props: PropsWithChildren<unknown>): JSX.Element => 
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <UserProvider>
-        <Provider store={reduxStore}>
-          <OcProvider>
-            <header>
-              {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                <MainNavigation {...mainNavigationProps} />
-              }
-            </header>
-            <main>
-              <HeaderCdpMessageBar />
-              <div className="search-main-container">{props.children}</div>
-            </main>
-          </OcProvider>
-        </Provider>
-      </UserProvider>
-      <footer>
-        <Footer {...footerProps} />
-      </footer>
+      <QueryClientProvider client={queryClient}>
+        <header>
+          {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            <MainNavigation {...mainNavigationProps} />
+          }
+        </header>
+        <main>
+          <HeaderCdpMessageBar />
+          <div className="search-main-container">{props.children}</div>
+        </main>
+        <footer>
+          <Footer {...footerProps} />
+        </footer>
+      </QueryClientProvider>
     </>
   );
 };

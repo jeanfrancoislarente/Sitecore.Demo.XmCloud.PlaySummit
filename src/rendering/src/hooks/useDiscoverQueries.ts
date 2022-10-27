@@ -26,8 +26,6 @@ const useDiscoverQueries = <T extends DiscoverResponseBase[]>(
           { entity: entity === 'free' ? undefined : entity, ...props },
           custom ? custom[entity] : undefined
         ),
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
     })),
   });
 

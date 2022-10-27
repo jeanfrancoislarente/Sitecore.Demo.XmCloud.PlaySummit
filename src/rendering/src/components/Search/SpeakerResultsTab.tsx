@@ -1,16 +1,12 @@
 import { Image, Text } from '@sitecore-jss/sitecore-jss-nextjs';
-import { PaginationProps } from 'components/Search/Pagination';
 import Link from 'next/link';
-import { PropsWithChildren } from 'react';
-import { GraphQLSpeaker } from '../../types/speaker';
-import { FacetsProps } from './Facets';
-import ResultsTab from './ResultsTab';
+import { speakerAdapter } from '../../helpers/DiscoverHelper';
+import { DiscoverSpeaker } from '../../interfaces/DiscoverSpeaker';
+import ResultsTab, { ResultsTabProps } from './ResultsTab';
 
-export type SpeakerResultsTabProps = PropsWithChildren &
-  PaginationProps &
-  FacetsProps & {
-    items: GraphQLSpeaker[];
-  };
+export type SpeakerResultsTabProps = ResultsTabProps & {
+  items: DiscoverSpeaker[];
+};
 
 const SpeakerResultsTab = (props: SpeakerResultsTabProps): JSX.Element => {
   return (
@@ -19,13 +15,17 @@ const SpeakerResultsTab = (props: SpeakerResultsTabProps): JSX.Element => {
       filters={props.filters}
       productsPerPage={props.productsPerPage}
       currentPage={props.currentPage}
+      onResultsPerPageChange={props.onResultsPerPageChange}
+      onSortChange={props.onSortChange}
+      sort={props.sort}
+      sortOptions={props.sortOptions}
       onPageChange={props.onPageChange}
       totalItems={props.totalItems}
       onClearFilters={props.onClearFilters}
       onFacetValueClick={props.onFacetValueClick}
       onFilterClick={props.onFilterClick}
     >
-      {props.items.map((speaker, index) => (
+      {props.items.map(speakerAdapter).map((speaker, index) => (
         <Link key={index} href={speaker.url.path} passHref>
           <a className="speakers-grid-speaker">
             <div className="speaker-image">

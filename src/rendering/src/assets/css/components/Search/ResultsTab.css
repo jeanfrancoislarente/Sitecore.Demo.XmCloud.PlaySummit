@@ -27,7 +27,7 @@
     }
 
     .item-grid {
-      @apply flex-1;
+      @apply flex-1 m-0;
 
       .grid-content {
         @apply p-0;

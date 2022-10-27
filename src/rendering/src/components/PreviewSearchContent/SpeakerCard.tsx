@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { faBuilding, faMapMarkerAlt, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import InfoText from '../NonSitecore/InfoText';
-import { getAbsoluteUrlPath } from '../../lib/discover/utils';
+import { getAbsoluteUrlPath } from '../../helpers/DiscoverHelper';
 
 export type SpeakerCardProps = {
   id: string;

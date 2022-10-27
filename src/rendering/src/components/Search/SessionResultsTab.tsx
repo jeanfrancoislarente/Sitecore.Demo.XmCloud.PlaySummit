@@ -1,13 +1,11 @@
-import { PaginationProps } from 'components/Search/Pagination';
-import { GraphQLSession } from '../../types/session';
+import { sessionAdapter } from '../../helpers/DiscoverHelper';
+import { DiscoverSession } from '../../interfaces/DiscoverSession';
 import SessionItem from '../Sessions/SessionItem';
-import { FacetsProps } from './Facets';
-import ResultsTab from './ResultsTab';
+import ResultsTab, { ResultsTabProps } from './ResultsTab';
 
-export type SessionResultsTabProps = FacetsProps &
-  PaginationProps & {
-    items: GraphQLSession[];
-  };
+export type SessionResultsTabProps = ResultsTabProps & {
+  items: DiscoverSession[];
+};
 
 const SessionResultsTab = (props: SessionResultsTabProps): JSX.Element => {
   return (
@@ -16,6 +14,10 @@ const SessionResultsTab = (props: SessionResultsTabProps): JSX.Element => {
       filters={props.filters}
       productsPerPage={props.productsPerPage}
       currentPage={props.currentPage}
+      onResultsPerPageChange={props.onResultsPerPageChange}
+      onSortChange={props.onSortChange}
+      sort={props.sort}
+      sortOptions={props.sortOptions}
       onPageChange={props.onPageChange}
       totalItems={props.totalItems}
       onClearFilters={props.onClearFilters}
@@ -23,7 +25,7 @@ const SessionResultsTab = (props: SessionResultsTabProps): JSX.Element => {
       onFilterClick={props.onFilterClick}
     >
       {props.items.map((session, index) => (
-        <SessionItem key={index} session={session} />
+        <SessionItem key={index} session={sessionAdapter(session)} />
       ))}
     </ResultsTab>
   );

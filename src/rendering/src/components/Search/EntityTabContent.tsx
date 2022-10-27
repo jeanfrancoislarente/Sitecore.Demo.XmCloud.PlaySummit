@@ -15,7 +15,7 @@ const EntityTab = (props: EntityTabProps): JSX.Element => {
       tabIndex={0}
       className="entity-tab-content"
     >
-      {props.active ? props.children : null}
+      {props.children}
     </div>
   );
 };

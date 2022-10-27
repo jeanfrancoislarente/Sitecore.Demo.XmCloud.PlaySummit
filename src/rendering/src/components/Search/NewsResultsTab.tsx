@@ -1,13 +1,11 @@
-import { PaginationProps } from 'components/Search/Pagination';
 import Link from 'next/link';
-import { News } from '../../types/news';
-import { FacetsProps } from './Facets';
-import ResultsTab from './ResultsTab';
+import { newsAdapter } from '../../helpers/DiscoverHelper';
+import { DiscoverNews } from '../../interfaces/DiscoverNews';
+import ResultsTab, { ResultsTabProps } from './ResultsTab';
 
-export type NewsResultsTabProps = FacetsProps &
-  PaginationProps & {
-    items: News[];
-  };
+export type NewsResultsTabProps = ResultsTabProps & {
+  items: DiscoverNews[];
+};
 
 const NewsResultsTab = (props: NewsResultsTabProps): JSX.Element => {
   return (
@@ -16,13 +14,17 @@ const NewsResultsTab = (props: NewsResultsTabProps): JSX.Element => {
       filters={props.filters}
       productsPerPage={props.productsPerPage}
       currentPage={props.currentPage}
+      onResultsPerPageChange={props.onResultsPerPageChange}
+      onSortChange={props.onSortChange}
+      sort={props.sort}
+      sortOptions={props.sortOptions}
       onPageChange={props.onPageChange}
       totalItems={props.totalItems}
       onClearFilters={props.onClearFilters}
       onFacetValueClick={props.onFacetValueClick}
       onFilterClick={props.onFilterClick}
     >
-      {props.items.map((news, index) => (
+      {props.items.map(newsAdapter).map((news, index) => (
         <div key={index} className="news-grid-item">
           <Link href={news.url} passHref>
             <a>

@@ -24,20 +24,32 @@ export const doGet = async <T extends DiscoverResponseBase = DiscoverResponseBas
   return widgetData;
 };
 
+export type DiscoverRequestFilter = { facetId: string; facetValueId: string };
 export type DiscoverRequestProps = {
   widgetId: string;
   keyphrase?: string;
   entity?: 'session' | 'vendor' | 'content' | 'sponsor' | 'speaker';
-  filters?: { facetId: string; facetValueId: string }[];
+  filters?: DiscoverRequestFilter[];
   facets?: string[];
   limit?: number;
+  sort?: string;
+  page?: number;
 };
 
 export const get = async <T extends DiscoverResponseBase = DiscoverResponseBase>(
-  { widgetId, keyphrase, filters = [], facets = [], entity, limit }: DiscoverRequestProps,
+  {
+    widgetId,
+    keyphrase,
+    filters = [],
+    facets = [],
+    entity,
+    limit = 10,
+    page = 0,
+    sort,
+  }: DiscoverRequestProps,
   data: unknown = {}
 ): Promise<T> => {
-  const types = facets
+  const types = [...filters.map(({ facetId }) => facetId), ...facets]
     .map((facet) => ({
       name: facet,
     }))
@@ -70,9 +82,10 @@ export const get = async <T extends DiscoverResponseBase = DiscoverResponseBase>
             types: types.length > 0 ? types : undefined,
           },
           content: {},
-          limit: limit ? limit : 10,
-          offset: 0,
+          limit,
+          offset: Math.max(0, (page - 1) * limit || 0),
           sort: {
+            ...(sort ? { value: [{ name: sort }] } : {}),
             choices: true,
           },
         },

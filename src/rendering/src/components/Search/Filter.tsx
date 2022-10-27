@@ -16,7 +16,7 @@ const Filter = (props: FilterProps): JSX.Element => {
     <select
       className="search-filter"
       name={props.name}
-      onChange={(e) => props.onChange(e.target.value)}
+      onChange={(e) => e.target.value !== props.value && props.onChange(e.target.value)}
       value={props.value}
     >
       <option value="">Select {props.name}</option>

@@ -1,14 +1,12 @@
 import { Image, Text } from '@sitecore-jss/sitecore-jss-nextjs';
-import { PaginationProps } from 'components/Search/Pagination';
 import Link from 'next/link';
-import { Sponsor } from '../../types/sponsor';
-import { FacetsProps } from './Facets';
-import ResultsTab from './ResultsTab';
+import { sponsorAdapter } from '../../helpers/DiscoverHelper';
+import { DiscoverSponsor } from '../../interfaces/DiscoverSponsor';
+import ResultsTab, { ResultsTabProps } from './ResultsTab';
 
-export type SponsorResultsTabProps = FacetsProps &
-  PaginationProps & {
-    items: Sponsor[];
-  };
+export type SponsorResultsTabProps = ResultsTabProps & {
+  items: DiscoverSponsor[];
+};
 
 const SponsorResultsTab = (props: SponsorResultsTabProps): JSX.Element => {
   return (
@@ -17,13 +15,17 @@ const SponsorResultsTab = (props: SponsorResultsTabProps): JSX.Element => {
       filters={props.filters}
       productsPerPage={props.productsPerPage}
       currentPage={props.currentPage}
+      onResultsPerPageChange={props.onResultsPerPageChange}
+      onSortChange={props.onSortChange}
+      sort={props.sort}
+      sortOptions={props.sortOptions}
       onPageChange={props.onPageChange}
       totalItems={props.totalItems}
       onClearFilters={props.onClearFilters}
       onFacetValueClick={props.onFacetValueClick}
       onFilterClick={props.onFilterClick}
     >
-      {props.items.map((sponsor, index) => (
+      {props.items.map(sponsorAdapter).map((sponsor, index) => (
         <Link key={index} href={sponsor.url} passHref>
           <a className="grid-item">
             <Image

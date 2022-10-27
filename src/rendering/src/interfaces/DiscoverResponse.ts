@@ -5,15 +5,23 @@ export type DiscoverResponseFacet = {
   text: string;
   count: number;
 };
+export type DiscoverResponseSortChoice = {
+  name: string;
+  label: string;
+};
+
 export interface DiscoverResponseBase {
   content?: unknown[];
   total_item: number;
   limit: number;
   offset: number;
+  sort?: {
+    choices?: DiscoverResponseSortChoice[];
+  };
   facet?: {
-    [key in string]: {
-      label: string;
-      value: DiscoverResponseFacet[];
+    [key in string]?: {
+      label?: string;
+      value?: DiscoverResponseFacet[];
     };
   };
 }
