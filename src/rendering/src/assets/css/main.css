@@ -113,7 +113,7 @@
 /* PreviewSearch */
 @import './components/PreviewSearch/PreviewSearch.css';
 
-/* PreviewSearchContent */
+/* Discover PreviewSearchContent */
 @import './components/PreviewSearchContent/PreviewSearch.css';
 @import './components/PreviewSearchContent/SearchInput.css';
 @import './components/PreviewSearchContent/SuggestionList.css';
@@ -124,13 +124,7 @@
 @import './components/PreviewSearchContent/NewsCard.css';
 @import './components/PreviewSearchContent/NewsList.css';
 
-/* Products */
-@import './components/Products/CategoriesList.css';
-@import './components/Products/CategoryHero.css';
-@import './components/Products/ProductDetails.css';
-@import './components/Products/Shop.css';
-
-/* Search */
+/* Discover Search */
 @import './components/Search/EntityTabs.css';
 @import './components/Search/EntityTab.css';
 @import './components/Search/EntityTabContent.css';
@@ -140,6 +134,12 @@
 @import './components/Search/Results.css';
 @import './components/Search/ResultsTab.css';
 @import './components/Search/Pagination.css';
+
+/* Products */
+@import './components/Products/CategoriesList.css';
+@import './components/Products/CategoryHero.css';
+@import './components/Products/ProductDetails.css';
+@import './components/Products/Shop.css';
 
 /* Sessions */
 @import './components/Sessions/SessionsGrid.css';
