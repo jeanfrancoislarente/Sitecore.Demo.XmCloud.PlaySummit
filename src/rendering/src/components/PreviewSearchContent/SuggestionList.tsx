@@ -1,6 +1,7 @@
 export type Suggestion = {
   id?: string;
   text?: string;
+  freq?: string;
   url?: string;
 };
 
@@ -25,8 +26,8 @@ const SuggestionList = (props: SuggestionList): JSX.Element => {
     <section className="suggestion-list">
       <span className="suggestion-list-title">{title}</span>
       <div className="suggestion-container">
-        {list.map((item) => (
-          <Suggestion key={item.id} {...item} url={`/search?q=${item.text}`} />
+        {list.map((item, index) => (
+          <Suggestion key={`${index}_${item.freq}`} {...item} url={`/search?q=${item.text}`} />
         ))}
       </div>
     </section>

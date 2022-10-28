@@ -7,6 +7,10 @@
   top: 123px;
   width: 100%;
 
+  @media (max-width: 1280px) {
+    display: none;
+  }
+
   .preview-search-content {
     margin-left: auto;
     margin-right: auto;
@@ -25,5 +29,14 @@
       flex-direction: column;
       padding: 0.5rem 1rem;
     }
+  }
+}
+
+.search-input-container {
+  display: block;
+  margin: auto 20px;
+
+  @media (max-width: 1280px) {
+    margin: 20px;
   }
 }

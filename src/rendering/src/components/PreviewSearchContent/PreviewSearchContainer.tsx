@@ -24,7 +24,12 @@ export type PreviewSearchContainerProps = {
 };
 
 type Suggestion = {
-  [key: string]: any;
+  text: string;
+  freq: number;
+};
+
+type SuggestionMap = {
+  [key: string]: Array<Suggestion>;
 };
 
 export const PreviewSearchPopup = forwardRef<HTMLDivElement, PreviewSearchPopupProps>(
@@ -36,23 +41,24 @@ export const PreviewSearchPopup = forwardRef<HTMLDivElement, PreviewSearchPopupP
     ClickOutside([popupRef], close);
 
     const getSuggestions = (
-      newsSuggestions: Suggestion = [],
-      sessionsSuggestions: Suggestion = [],
-      speakersSuggestions: Suggestion = []
+      newsSuggestions: SuggestionMap,
+      sessionsSuggestions: SuggestionMap,
+      speakersSuggestions: SuggestionMap
     ) => [
-      ...(newsSuggestions['content_name_context_aware'] || []),
-      ...(sessionsSuggestions['session_name_context_aware'] || []),
-      ...(speakersSuggestions['speaker_name_context_aware'] || []),
+      ...((newsSuggestions && newsSuggestions['content_name_context_aware']) || []),
+      ...((sessionsSuggestions && sessionsSuggestions['session_name_context_aware']) || []),
+      ...((speakersSuggestions && speakersSuggestions['speaker_name_context_aware']) || []),
     ];
 
     const suggestions = getSuggestions(
-        news?.suggestion,
-        sessions?.suggestion,
-        speakers?.suggestion
+        news?.suggestion as unknown as SuggestionMap,
+        sessions?.suggestion as unknown as SuggestionMap,
+        speakers?.suggestion as unknown as SuggestionMap
       ),
       sessionsAvailable = sessions && sessions.total_item > 0,
       speakersAvailable = speakers && speakers.total_item > 0,
       newsAvailable = news && news.total_item > 0;
+
     return (
       ((suggestions && suggestions.length > 0) ||
         sessionsAvailable ||

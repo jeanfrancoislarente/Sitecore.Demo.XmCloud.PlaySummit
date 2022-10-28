@@ -5,7 +5,6 @@ export type NewsListProps = {
   list?: NewsCardProps[];
 };
 
-
 const PreviewSearchNewsList = (props: NewsListProps): JSX.Element => {
   const { resultsUrl, list = [] } = props;
 

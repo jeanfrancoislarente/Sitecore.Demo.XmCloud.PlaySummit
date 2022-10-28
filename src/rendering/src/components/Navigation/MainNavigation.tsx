@@ -95,9 +95,7 @@ const MainNavigation = (props: MainNavigationProps): JSX.Element => {
               </Link>
             </li>
           </ul>
-        </div>
-        <div className="shop-search-input-container">
-          <div id="search-input-container">{previewSearchWidget}</div>
+          <div className="search-input-container">{previewSearchWidget}</div>
         </div>
       </div>
     </nav>
