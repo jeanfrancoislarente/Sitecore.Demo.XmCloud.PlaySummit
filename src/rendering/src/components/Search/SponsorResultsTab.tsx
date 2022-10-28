@@ -1,7 +1,7 @@
 import { Image, Text } from '@sitecore-jss/sitecore-jss-nextjs';
 import Link from 'next/link';
 import { sponsorAdapter } from '../../helpers/DiscoverHelper';
-import { DiscoverSponsor } from '../../interfaces/DiscoverSponsor';
+import { DiscoverSponsor } from '../../interfaces/discover/DiscoverSponsor';
 import ResultsTab, { ResultsTabProps } from './ResultsTab';
 
 export type SponsorResultsTabProps = ResultsTabProps & {
@@ -11,9 +11,10 @@ export type SponsorResultsTabProps = ResultsTabProps & {
 const SponsorResultsTab = (props: SponsorResultsTabProps): JSX.Element => {
   return (
     <ResultsTab
+      loading={props.loading}
       facets={props.facets}
       filters={props.filters}
-      productsPerPage={props.productsPerPage}
+      perPage={props.perPage}
       currentPage={props.currentPage}
       onResultsPerPageChange={props.onResultsPerPageChange}
       onSortChange={props.onSortChange}
@@ -25,21 +26,29 @@ const SponsorResultsTab = (props: SponsorResultsTabProps): JSX.Element => {
       onFacetValueClick={props.onFacetValueClick}
       onFilterClick={props.onFilterClick}
     >
-      {props.items.map(sponsorAdapter).map((sponsor, index) => (
-        <Link key={index} href={sponsor.url} passHref>
-          <a className="grid-item">
-            <Image
-              field={sponsor.fields.Logo}
-              alt={sponsor.fields.Name.value}
-              width={265}
-              height={265}
-            />
-            <div className="item-details">
-              <Text tag="p" field={sponsor.fields.Name} />
+      <section className="section">
+        <div className="section-content container">
+          <div className="item-grid">
+            <div className="grid-content">
+              {props.items.map(sponsorAdapter).map((sponsor, index) => (
+                <Link key={index} href={sponsor.url} passHref>
+                  <a className="grid-item">
+                    <Image
+                      field={sponsor.fields.Logo}
+                      alt={sponsor.fields.Name.value}
+                      width={265}
+                      height={265}
+                    />
+                    <div className="item-details">
+                      <Text tag="p" field={sponsor.fields.Name} />
+                    </div>
+                  </a>
+                </Link>
+              ))}
             </div>
-          </a>
-        </Link>
-      ))}
+          </div>
+        </div>
+      </section>
     </ResultsTab>
   );
 };

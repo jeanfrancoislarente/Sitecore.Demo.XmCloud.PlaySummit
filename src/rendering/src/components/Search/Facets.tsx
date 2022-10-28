@@ -1,10 +1,10 @@
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CheckIcon } from '@radix-ui/react-icons';
-import { SearchContext } from 'components/Search/SearchProvider';
 import { useContext } from 'react';
+import { FacetValueClickedActionPayload } from '../../interfaces/discover/FacetValueClickedActionPayload';
+import { SearchContext } from '../../components/Search/SearchProvider';
 import { DiscoverRequestFilter } from '../../lib/discover/api';
-import { FacetValueClickedActionPayload } from '../../hooks/useSearchResults';
 import * as AccordionFacets from './AccordionFacets/AccordionFacets';
 
 export type FacetValue = {
@@ -73,7 +73,6 @@ const Facets = (props: FacetsProps): JSX.Element => {
       </ul>
       <AccordionFacets.Root
         className="search-facets-root"
-        defaultFacetTypesExpandedList={[]}
         onFacetValueClick={props.onFacetValueClick}
       >
         {facetNames.map((f) => (

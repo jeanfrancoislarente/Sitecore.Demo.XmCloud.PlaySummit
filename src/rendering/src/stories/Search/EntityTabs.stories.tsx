@@ -10,14 +10,14 @@ export default {
 } as ComponentMeta<typeof EntityTabs>;
 
 const Template: ComponentStory<typeof EntityTabs> = (args) => (
-  <SearchProvider>
+  <SearchProvider keyphrase="">
     <EntityTabs {...args} />
   </SearchProvider>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  defaultSelected: 'sessions',
+  selected: 'sessions',
   tabs: [
     {
       id: 'sessions',

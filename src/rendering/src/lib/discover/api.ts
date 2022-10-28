@@ -1,6 +1,6 @@
 import { AxiosDataFetcher } from '@sitecore-jss/sitecore-jss-nextjs';
-import { merge } from 'lodash';
-import { DiscoverResponseBase } from '../../interfaces/DiscoverResponse';
+import { merge, uniq } from 'lodash';
+import { DiscoverResponseBase } from '../../interfaces/discover/DiscoverResponse';
 
 const domainId = process.env.NEXT_PUBLIC_SEARCH_API_DOMAIN || '';
 const host = process.env.NEXT_PUBLIC_SEARCH_API_HOST || '';
@@ -57,7 +57,7 @@ export const get = async <T extends DiscoverResponseBase = DiscoverResponseBase>
   }: DiscoverRequestProps,
   data: unknown = {}
 ): Promise<T> => {
-  const types = [...filters.map(({ facetId }) => facetId), ...facets]
+  const types = uniq([...filters.map(({ facetId }) => facetId), ...facets])
     .map((facet) => ({
       name: facet,
     }))
@@ -86,7 +86,10 @@ export const get = async <T extends DiscoverResponseBase = DiscoverResponseBase>
         search: {
           query: keyphrase ? { keyphrase } : undefined,
           facet: {
-            sort: { name: 'count', order: 'desc' },
+            sort: {
+              name: 'text',
+              order: 'asc',
+            },
             types: types.length > 0 ? types : undefined,
           },
           content: {},

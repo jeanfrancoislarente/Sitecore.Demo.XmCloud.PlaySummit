@@ -12,7 +12,7 @@ const PreviewSearchSessionList = (props: SessionListProps): JSX.Element => {
     <section className="session-list item-grid sessions-grid">
       <span className="session-list-title">
         Sessions
-        <a href={`${resultsUrl}&tab=sessions`} className="view-all">
+        <a href={`${resultsUrl}&tab=session`} className="view-all">
           View All
         </a>
       </span>

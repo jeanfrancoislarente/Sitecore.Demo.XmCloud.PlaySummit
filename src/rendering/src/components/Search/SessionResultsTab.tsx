@@ -1,5 +1,5 @@
 import { sessionAdapter } from '../../helpers/DiscoverHelper';
-import { DiscoverSession } from '../../interfaces/DiscoverSession';
+import { DiscoverSession } from '../../interfaces/discover/DiscoverSession';
 import SessionItem from '../Sessions/SessionItem';
 import ResultsTab, { ResultsTabProps } from './ResultsTab';
 
@@ -10,9 +10,10 @@ export type SessionResultsTabProps = ResultsTabProps & {
 const SessionResultsTab = (props: SessionResultsTabProps): JSX.Element => {
   return (
     <ResultsTab
+      loading={props.loading}
       facets={props.facets}
       filters={props.filters}
-      productsPerPage={props.productsPerPage}
+      perPage={props.perPage}
       currentPage={props.currentPage}
       onResultsPerPageChange={props.onResultsPerPageChange}
       onSortChange={props.onSortChange}
@@ -24,9 +25,13 @@ const SessionResultsTab = (props: SessionResultsTabProps): JSX.Element => {
       onFacetValueClick={props.onFacetValueClick}
       onFilterClick={props.onFilterClick}
     >
-      {props.items.map((session, index) => (
-        <SessionItem key={index} session={sessionAdapter(session)} />
-      ))}
+      <div className="item-grid sessions-grid">
+        <div className="grid-content">
+          {props.items.map((session, index) => (
+            <SessionItem key={index} session={sessionAdapter(session)} />
+          ))}
+        </div>
+      </div>
     </ResultsTab>
   );
 };

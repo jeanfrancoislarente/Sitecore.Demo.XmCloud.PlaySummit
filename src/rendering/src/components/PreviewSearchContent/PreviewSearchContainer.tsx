@@ -1,9 +1,9 @@
 import { useEffect, useRef, forwardRef } from 'react';
 import useDiscoverQueries from '../../hooks/useDiscoverQueries';
-import { DiscoverNews } from '../../interfaces/DiscoverNews';
-import { DiscoverResponse } from '../../interfaces/DiscoverResponse';
-import { DiscoverSession } from '../../interfaces/DiscoverSession';
-import { DiscoverSpeaker } from '../../interfaces/DiscoverSpeaker';
+import { DiscoverNews } from '../../interfaces/discover/DiscoverNews';
+import { DiscoverResponse } from '../../interfaces/discover/DiscoverResponse';
+import { DiscoverSession } from '../../interfaces/discover/DiscoverSession';
+import { DiscoverSpeaker } from '../../interfaces/discover/DiscoverSpeaker';
 import ClickOutside from '../ShopCommon/ClickOutside';
 import PreviewSearchNewsList from './PreviewSearchNewsList';
 import PreviewSearchSessionList from './PreviewSearchSessionList';
@@ -32,6 +32,16 @@ type SuggestionMap = {
   [key: string]: Array<Suggestion>;
 };
 
+const getSuggestions = (
+  newsSuggestions: SuggestionMap,
+  sessionsSuggestions: SuggestionMap,
+  speakersSuggestions: SuggestionMap
+) => [
+  ...((newsSuggestions && newsSuggestions['content_name_context_aware']) || []),
+  ...((sessionsSuggestions && sessionsSuggestions['session_name_context_aware']) || []),
+  ...((speakersSuggestions && speakersSuggestions['speaker_name_context_aware']) || []),
+];
+
 export const PreviewSearchPopup = forwardRef<HTMLDivElement, PreviewSearchPopupProps>(
   (
     { resultsUrl, news, sessions, speakers, close }: PreviewSearchPopupProps,
@@ -40,35 +50,25 @@ export const PreviewSearchPopup = forwardRef<HTMLDivElement, PreviewSearchPopupP
     const popupRef = useRef(null);
     ClickOutside([popupRef], close);
 
-    const getSuggestions = (
-      newsSuggestions: SuggestionMap,
-      sessionsSuggestions: SuggestionMap,
-      speakersSuggestions: SuggestionMap
-    ) => [
-      ...((newsSuggestions && newsSuggestions['content_name_context_aware']) || []),
-      ...((sessionsSuggestions && sessionsSuggestions['session_name_context_aware']) || []),
-      ...((speakersSuggestions && speakersSuggestions['speaker_name_context_aware']) || []),
-    ];
-
     const suggestions = getSuggestions(
-        news?.suggestion as unknown as SuggestionMap,
-        sessions?.suggestion as unknown as SuggestionMap,
-        speakers?.suggestion as unknown as SuggestionMap
-      ),
-      sessionsAvailable = sessions && sessions.total_item > 0,
-      speakersAvailable = speakers && speakers.total_item > 0,
-      newsAvailable = news && news.total_item > 0;
+      news?.suggestion as unknown as SuggestionMap,
+      sessions?.suggestion as unknown as SuggestionMap,
+      speakers?.suggestion as unknown as SuggestionMap
+    );
+    const sessionsAvailable = sessions && sessions.total_item > 0;
+    const speakersAvailable = speakers && speakers.total_item > 0;
+    const newsAvailable = news && news.total_item > 0;
 
     return (
       ((suggestions && suggestions.length > 0) ||
         sessionsAvailable ||
         speakersAvailable ||
         newsAvailable) && (
-        <div className={`preview-search-content-container`} ref={forwardedRef}>
-          <div className={`preview-search-content`}>
-            <div className={`preview-search-content-popup`} ref={popupRef}>
+        <div className="preview-search-content-container" ref={forwardedRef}>
+          <div className="preview-search-content">
+            <div className="preview-search-content-popup" ref={popupRef}>
               {suggestions && suggestions.length > 0 && (
-                <SuggestionList title={`Do you mean?`} list={suggestions} />
+                <SuggestionList title="Do you mean?" list={suggestions} />
               )}
               {sessionsAvailable && (
                 <PreviewSearchSessionList resultsUrl={resultsUrl} list={sessions.content} />

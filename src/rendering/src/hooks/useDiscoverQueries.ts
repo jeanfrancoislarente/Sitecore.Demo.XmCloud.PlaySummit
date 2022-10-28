@@ -1,6 +1,6 @@
 import { useQueries } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { DiscoverResponseBase } from '../interfaces/DiscoverResponse';
+import { DiscoverResponseBase } from '../interfaces/discover/DiscoverResponse';
 import * as api from '../lib/discover/api';
 import { DiscoverRequestProps } from '../lib/discover/api';
 

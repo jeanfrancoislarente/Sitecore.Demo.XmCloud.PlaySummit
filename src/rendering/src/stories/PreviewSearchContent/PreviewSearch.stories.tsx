@@ -2,10 +2,10 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { PreviewSearchPopup } from '../../components/PreviewSearchContent/PreviewSearchContainer';
-import { DiscoverNews } from '../../interfaces/DiscoverNews';
-import { DiscoverResponse, DiscoverResponseBase } from '../../interfaces/DiscoverResponse';
-import { DiscoverSession } from '../../interfaces/DiscoverSession';
-import { DiscoverSpeaker } from '../../interfaces/DiscoverSpeaker';
+import { DiscoverNews } from '../../interfaces/discover/DiscoverNews';
+import { DiscoverResponse, DiscoverResponseBase } from '../../interfaces/discover/DiscoverResponse';
+import { DiscoverSession } from '../../interfaces/discover/DiscoverSession';
+import { DiscoverSpeaker } from '../../interfaces/discover/DiscoverSpeaker';
 import { mockPreviewSearchFields } from '../Pages/PageStoriesCommon';
 
 export default {

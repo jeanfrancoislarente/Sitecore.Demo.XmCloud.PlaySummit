@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { ParsedUrlQuery } from 'querystring';
 import React, { PropsWithChildren, useContext, useMemo } from 'react';
-import { DiscoverResponseBase } from '../../interfaces/DiscoverResponse';
+import { DiscoverResponseBase } from '../../interfaces/discover/DiscoverResponse';
 import connectResultsTab from '../../lib/discover/hocs/connectResultsTab';
 import * as api from '../../lib/discover/api';
 import NewsResultsTab from './NewsResultsTab';
@@ -14,7 +13,7 @@ import Filters, { FiltersProps } from './Filters';
 import SearchProvider, { SearchContext } from './SearchProvider';
 
 export type ResultsProps = PropsWithChildren & {
-  defaultSelectedTab?: string;
+  selectedTab: string;
   filterOptions: FiltersProps['options'];
   tabs: Tab[];
 };
@@ -63,22 +62,25 @@ const tabs = [
     Component: connectResultsTab({
       entity: 'content',
       hasFilters: false,
-      facetsTypes: [],
+      facetsTypes: ['audience'],
     })(NewsResultsTab),
   },
 ];
 
 const Results = (props: ResultsProps): JSX.Element => {
-  const { onChangeFilter } = useContext(SearchContext);
+  const { keyphrase, onChangeFilter } = useContext(SearchContext);
   return (
     <div className="search-results">
+      {keyphrase && (
+        <div className="search-results-header">Results for: &quot;{keyphrase}&quot;</div>
+      )}
       <Filters
         options={props.filterOptions}
         onChange={onChangeFilter}
         className="search-results-filters"
       />
       <EntityTabs
-        defaultSelected={props.defaultSelectedTab || 'session'}
+        selected={props.selectedTab || 'session'}
         tabs={props.tabs}
         className="search-results-tabs"
       />
@@ -87,14 +89,13 @@ const Results = (props: ResultsProps): JSX.Element => {
 };
 
 const widgetId = 'rfkid_7';
-type ResultsContainerProps = { query: ParsedUrlQuery };
+type ResultsContainerProps = { q: string; tab: string };
 
 export const ResultsContainer = (props: ResultsContainerProps): JSX.Element => {
-  const { query } = props;
-  const keyphrase = (query.q || '').toString();
-  const tab = (query.tab || '').toString() || undefined;
-  const { isLoading, data: { facet: { days = {}, rooms = {} } = {} } = {} } =
-    useQuery<DiscoverResponseBase>([keyphrase, 'filters'], () =>
+  const { q: keyphrase, tab } = props;
+  const { data: { facet: { days = {}, rooms = {} } = {} } = {} } = useQuery<DiscoverResponseBase>(
+    [keyphrase, 'filters'],
+    () =>
       api.get(
         {
           entity: 'session',
@@ -108,7 +109,7 @@ export const ResultsContainer = (props: ResultsContainerProps): JSX.Element => {
         },
         {}
       )
-    );
+  );
   const filterOptions = useMemo<FiltersProps['options']>(() => {
     return {
       schedule: days.value?.map(({ text, id }) => ({ value: id, label: text })) || [],
@@ -118,8 +119,7 @@ export const ResultsContainer = (props: ResultsContainerProps): JSX.Element => {
 
   return (
     <SearchProvider keyphrase={keyphrase}>
-      {isLoading && <div>Loading...</div>}
-      <Results filterOptions={filterOptions} tabs={tabs} defaultSelectedTab={tab} />
+      <Results filterOptions={filterOptions} tabs={tabs} selectedTab={tab} />
     </SearchProvider>
   );
 };

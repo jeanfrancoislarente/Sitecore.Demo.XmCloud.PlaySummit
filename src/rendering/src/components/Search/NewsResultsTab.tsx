@@ -1,6 +1,8 @@
+import { DateField, Image, RichText, Text } from '@sitecore-jss/sitecore-jss-nextjs';
 import Link from 'next/link';
+import { newsDateFormatter } from '../../helpers/DateHelper';
 import { newsAdapter } from '../../helpers/DiscoverHelper';
-import { DiscoverNews } from '../../interfaces/DiscoverNews';
+import { DiscoverNews } from '../../interfaces/discover/DiscoverNews';
 import ResultsTab, { ResultsTabProps } from './ResultsTab';
 
 export type NewsResultsTabProps = ResultsTabProps & {
@@ -10,9 +12,10 @@ export type NewsResultsTabProps = ResultsTabProps & {
 const NewsResultsTab = (props: NewsResultsTabProps): JSX.Element => {
   return (
     <ResultsTab
+      loading={props.loading}
       facets={props.facets}
       filters={props.filters}
-      productsPerPage={props.productsPerPage}
+      perPage={props.perPage}
       currentPage={props.currentPage}
       onResultsPerPageChange={props.onResultsPerPageChange}
       onSortChange={props.onSortChange}
@@ -24,23 +27,39 @@ const NewsResultsTab = (props: NewsResultsTabProps): JSX.Element => {
       onFacetValueClick={props.onFacetValueClick}
       onFilterClick={props.onFilterClick}
     >
-      {props.items.map(newsAdapter).map((news, index) => (
-        <div key={index} className="news-grid-item">
-          <Link href={news.url} passHref>
-            <a>
-              <img
-                className="item-image"
-                src={news.fields.Image?.value?.src}
-                alt="News"
-                width="465px"
-                height="260px"
-                loading="lazy"
-              />
-              {news.fields.Title?.value}
-            </a>
-          </Link>
+      <section className="section section-news-list">
+        <div className="container">
+          <div className="content">
+            {props.items.map(newsAdapter).map((news, index) => (
+              <div key={index} className="news">
+                <div className="image-container">
+                  <Image
+                    field={news.fields.Image}
+                    alt={news.fields.Title}
+                    width={340}
+                    height={227}
+                  />
+                </div>
+                <div className="text-container">
+                  <Text tag="div" className="news-title" field={news.fields.Title} />
+                  <DateField
+                    tag="p"
+                    className="news-date"
+                    field={news.fields.PublishDate}
+                    render={newsDateFormatter}
+                  />
+                  <RichText className="news-excerpt" field={news.fields.Excerpt} />
+                </div>
+                <div className="button-container">
+                  <Link href={news.url}>
+                    <a className="btn-main">Read&nbsp;More</a>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
+      </section>
     </ResultsTab>
   );
 };

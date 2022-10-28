@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState, FC } from 'react';
+import { useCallback, useContext, useState, FC, useEffect } from 'react';
 import EntityTab from './EntityTab';
 import EntityTabContent from './EntityTabContent';
 import { SearchContext } from './SearchProvider';
@@ -13,14 +13,18 @@ export type Tab = {
 export type EntityTabsProps = {
   className?: string;
   theme?: string;
-  defaultSelected: Tab['id'];
+  selected: Tab['id'];
   tabs: Tab[];
 };
 
 const EntityTabs = (props: EntityTabsProps): JSX.Element => {
   const { totals } = useContext(SearchContext);
+  const { selected } = props;
   const themeClass = props.theme ? `entity-tabs-${props.theme}` : '';
-  const [activeTab, setActiveTab] = useState<Tab['id']>(() => props.defaultSelected);
+  const [activeTab, setActiveTab] = useState<Tab['id']>(selected);
+  useEffect(() => {
+    setActiveTab(selected);
+  }, [selected]);
   const onSelectTab = useCallback((id: Tab['id']) => {
     setActiveTab(id);
   }, []);

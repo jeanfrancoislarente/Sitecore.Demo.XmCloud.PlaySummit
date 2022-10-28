@@ -2,9 +2,9 @@ import { HeaderProps } from '../../components/Navigation/Header';
 import { FooterProps } from '../../components/Navigation/Footer';
 import HeroSectionCta from '../../components/PageContent/HeroSectionCta';
 import MainNavigation from '../../components/Navigation/MainNavigation';
-import { DiscoverNews } from '../../interfaces/DiscoverNews';
-import { DiscoverSession } from '../../interfaces/DiscoverSession';
-import { DiscoverSpeaker } from '../../interfaces/DiscoverSpeaker';
+import { DiscoverNews } from '../../interfaces/discover/DiscoverNews';
+import { DiscoverSession } from '../../interfaces/discover/DiscoverSession';
+import { DiscoverSpeaker } from '../../interfaces/discover/DiscoverSpeaker';
 
 export const mockMainNavigationFields = {
   data: {

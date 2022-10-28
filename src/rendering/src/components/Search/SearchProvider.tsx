@@ -22,11 +22,13 @@ export type SearchProviderProps = { keyphrase: string } & PropsWithChildren;
 
 const SearchProvider = (props: SearchProviderProps): JSX.Element => {
   const { keyphrase } = props;
+
   const [totals, setTotals] = useState<SearchContextType['totals']>({});
   const [filters, setFilters] = useState<DiscoverRequestFilter[]>([]);
+
   const onUpdate = useCallback((id: string, val: number) => {
     setTotals((prevTotals) => {
-      const { [id]: currentValue = 0 } = prevTotals;
+      const { [id]: currentValue } = prevTotals;
       if (currentValue !== val) {
         return {
           ...prevTotals,
@@ -37,11 +39,18 @@ const SearchProvider = (props: SearchProviderProps): JSX.Element => {
     });
   }, []);
   const onChangeFilter = useCallback((facetId: string, facetValueId: string) => {
-    setFilters((prevFilters) => [
-      ...prevFilters,
-      { facetId: facetId === 'schedule' ? 'days' : facetId, facetValueId },
-    ]);
+    setFilters((prevFilters) => {
+      const id = facetId === 'schedule' ? 'days' : facetId;
+      let result: DiscoverRequestFilter[];
+      if (facetValueId === '') {
+        result = prevFilters.filter(({ facetId: currentFacetId }) => currentFacetId === facetId);
+      } else {
+        result = [...prevFilters, { facetId: id, facetValueId }];
+      }
+      return result;
+    });
   }, []);
+
   const value = useMemo(
     () => ({
       keyphrase,

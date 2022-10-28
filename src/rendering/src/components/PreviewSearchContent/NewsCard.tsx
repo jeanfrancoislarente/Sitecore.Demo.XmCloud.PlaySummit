@@ -9,7 +9,7 @@ export type NewsCardProps = {
   publish_date: string;
 };
 
-const SessionCard = (props: NewsCardProps): JSX.Element => {
+const NewsCard = (props: NewsCardProps): JSX.Element => {
   const { image_url, name, url, publish_date } = props;
 
   return (
@@ -25,4 +25,4 @@ const SessionCard = (props: NewsCardProps): JSX.Element => {
   );
 };
 
-export default SessionCard;
+export default NewsCard;

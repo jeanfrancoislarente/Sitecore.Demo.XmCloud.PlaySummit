@@ -1,10 +1,10 @@
 import { QueryClient } from '@tanstack/react-query';
-import { DiscoverNews } from '../interfaces/DiscoverNews';
-import { DiscoverResponseSortChoice } from '../interfaces/DiscoverResponse';
-import { DiscoverSession } from '../interfaces/DiscoverSession';
-import { DiscoverSpeaker } from '../interfaces/DiscoverSpeaker';
-import { DiscoverSponsor } from '../interfaces/DiscoverSponsor';
-import { DiscoverVendor } from '../interfaces/DiscoverVendor';
+import { DiscoverNews } from '../interfaces/discover/DiscoverNews';
+import { DiscoverResponseSortChoice } from '../interfaces/discover/DiscoverResponse';
+import { DiscoverSession } from '../interfaces/discover/DiscoverSession';
+import { DiscoverSpeaker } from '../interfaces/discover/DiscoverSpeaker';
+import { DiscoverSponsor } from '../interfaces/discover/DiscoverSponsor';
+import { DiscoverVendor } from '../interfaces/discover/DiscoverVendor';
 import { News } from '../types/news';
 import { GraphQLSession } from '../types/session';
 import { GraphQLSpeaker } from '../types/speaker';
@@ -29,11 +29,18 @@ export const getUrlFromName = (type: string, name: string): string =>
 
 const SORTING_OPTIONS: Record<'session' | 'vendor' | 'content' | 'sponsor' | 'speaker', string[]> =
   {
-    content: ['featured_desc', 'content_name_desc', 'featured_desc'],
-    session: ['name_asc', 'name_desc', 'featured_desc', 'price_asc', 'price_desc'],
-    vendor: ['name_asc', 'name_desc', 'featured_desc', 'price_asc', 'price_desc'],
-    sponsor: ['name_asc', 'name_desc', 'featured_desc', 'price_asc', 'price_desc'],
-    speaker: ['name_asc', 'name_desc', 'featured_desc', 'price_asc', 'price_desc'],
+    content: ['featured_desc', 'featured_asc'],
+    session: [
+      'featured_desc',
+      'featured_asc',
+      'session_days_asc',
+      'session_days_desc',
+      'session_duration_asc',
+      'session_duration_desc',
+    ],
+    vendor: ['featured_desc', 'featured_asc'],
+    sponsor: ['featured_desc', 'featured_asc'],
+    speaker: ['featured_desc', 'featured_asc'],
   };
 
 export const getSortingOptions = (
@@ -144,3 +151,24 @@ export const newsAdapter = ({
     },
   },
 });
+
+export type AsyncFunction<Result> = (...args: unknown[]) => Promise<Result>;
+
+export const debounceAsync = <Result>(
+  fn: AsyncFunction<Result>,
+  wait: number
+): AsyncFunction<Result> => {
+  let timeoutId: NodeJS.Timeout | undefined;
+
+  return function (...args: unknown[]): Promise<Result> {
+    clearTimeout(timeoutId);
+
+    return new Promise((resolve, reject) => {
+      timeoutId = setTimeout(() => {
+        fn(...args)
+          .then(resolve)
+          .catch(reject);
+      }, wait);
+    });
+  };
+};

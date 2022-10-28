@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import SearchProvider from '../../components/Search/SearchProvider';
 import Facets from '../../components/Search/Facets';
 import { facetsProp, filtersProp } from '../mock-discover-data';
 
@@ -9,7 +10,11 @@ export default {
   component: Facets,
 } as ComponentMeta<typeof Facets>;
 
-const Template: ComponentStory<typeof Facets> = (args) => <Facets {...args} />;
+const Template: ComponentStory<typeof Facets> = (args) => (
+  <SearchProvider keyphrase="test">
+    <Facets {...args} />
+  </SearchProvider>
+);
 
 export const Default = Template.bind({});
 Default.args = {

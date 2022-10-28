@@ -1,7 +1,7 @@
 import { Image, Text } from '@sitecore-jss/sitecore-jss-nextjs';
 import Link from 'next/link';
 import { speakerAdapter } from '../../helpers/DiscoverHelper';
-import { DiscoverSpeaker } from '../../interfaces/DiscoverSpeaker';
+import { DiscoverSpeaker } from '../../interfaces/discover/DiscoverSpeaker';
 import ResultsTab, { ResultsTabProps } from './ResultsTab';
 
 export type SpeakerResultsTabProps = ResultsTabProps & {
@@ -11,9 +11,10 @@ export type SpeakerResultsTabProps = ResultsTabProps & {
 const SpeakerResultsTab = (props: SpeakerResultsTabProps): JSX.Element => {
   return (
     <ResultsTab
+      loading={props.loading}
       facets={props.facets}
       filters={props.filters}
-      productsPerPage={props.productsPerPage}
+      perPage={props.perPage}
       currentPage={props.currentPage}
       onResultsPerPageChange={props.onResultsPerPageChange}
       onSortChange={props.onSortChange}
@@ -25,22 +26,24 @@ const SpeakerResultsTab = (props: SpeakerResultsTabProps): JSX.Element => {
       onFacetValueClick={props.onFacetValueClick}
       onFilterClick={props.onFilterClick}
     >
-      {props.items.map(speakerAdapter).map((speaker, index) => (
-        <Link key={index} href={speaker.url.path} passHref>
-          <a className="speakers-grid-speaker">
-            <div className="speaker-image">
-              <Image
-                field={speaker.picture.jsonValue}
-                alt={speaker.name.value}
-                width={265}
-                height={265}
-              />
-            </div>
-            <Text className="speaker-name" tag="p" field={speaker.name} />
-            <Text tag="p" field={speaker.jobTitle} />
-          </a>
-        </Link>
-      ))}
+      <div className="speakers-grid container">
+        {props.items.map(speakerAdapter).map((speaker, index) => (
+          <Link key={index} href={speaker.url.path} passHref>
+            <a className="speakers-grid-speaker">
+              <div className="speaker-image">
+                <Image
+                  field={speaker.picture.jsonValue}
+                  alt={speaker.name.value}
+                  width={265}
+                  height={265}
+                />
+              </div>
+              <Text className="speaker-name" tag="p" field={speaker.name} />
+              <Text tag="p" field={speaker.jobTitle} />
+            </a>
+          </Link>
+        ))}
+      </div>
     </ResultsTab>
   );
 };

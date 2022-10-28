@@ -3,7 +3,7 @@ import { ReactElement } from 'react';
 import { ResultsContainer } from '../../components/Search/Results';
 import { SearchLayout } from '../../components/Search/Search';
 
-const SearchResults = withQueryParams(ResultsContainer);
+const SearchResults = withQueryParams(ResultsContainer, ['q', 'tab']);
 const Search = (): JSX.Element => {
   return (
     <>

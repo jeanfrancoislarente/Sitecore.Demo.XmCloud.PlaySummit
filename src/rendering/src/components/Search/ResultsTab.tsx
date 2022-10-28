@@ -1,5 +1,6 @@
 import { PropsWithChildren, FC } from 'react';
-import { DiscoverResponseSortChoice } from '../../interfaces/DiscoverResponse';
+import { DiscoverResponseSortChoice } from '../../interfaces/discover/DiscoverResponse';
+import Spinner from '../../components/ShopCommon/Spinner';
 import Facets, { FacetsProps } from './Facets';
 import Pagination, { PaginationProps } from './Pagination';
 
@@ -10,12 +11,13 @@ export type ResultsTabProps = PropsWithChildren &
     onSortChange: (sortChoice: string) => void;
     sort: DiscoverResponseSortChoice['name'];
     sortOptions: DiscoverResponseSortChoice[];
+    loading: boolean;
   };
 
 const ResultsTab: FC<ResultsTabProps> = (props) => {
   return (
     <div className="search-results-tab">
-      <div className="search-results-tab-filters">
+      <div className="search-results-tab-facets">
         <Facets
           facets={props.facets}
           filters={props.filters}
@@ -25,37 +27,45 @@ const ResultsTab: FC<ResultsTabProps> = (props) => {
         />
       </div>
       <div className="search-results-tab-content">
-        <div>
-          <div>
-            <label>Sort by:</label>
-            <select
-              value={props.sort}
-              onChange={(e) => {
-                props.onSortChange(e.currentTarget.value);
-              }}
-            >
-              {props.sortOptions.map(({ name, label }) => (
-                <option key={name} value={name}>
-                  {label}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div className="search-results-tab-header">
+          {props.sortOptions.length > 0 && (
+            <div className="search-results-tab-sort">
+              <label>Sort by:</label>
+              <select
+                value={props.sort}
+                onChange={(e) => {
+                  props.onSortChange(e.currentTarget.value);
+                }}
+              >
+                {props.sortOptions.map(({ name, label }) => (
+                  <option key={name} value={name}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
         </div>
-        <div className="item-grid sessions-grid">
-          <div className="grid-content">{props.children}</div>
+        <div className="search-results-tab-results">
+          {props.loading ? (
+            <div className="search-results-spinner">
+              <Spinner loading={props.loading} />
+            </div>
+          ) : (
+            props.children
+          )}
         </div>
-        <div className="search-results-footer">
+        <div className="search-results-tab-footer">
           <div>
             <label>Results Per Page</label>
             <select
               defaultValue={10}
-              className="search-results-per-page"
+              className="search-results-tab-per-page"
               onChange={(e) => {
                 props.onResultsPerPageChange(Number(e.currentTarget.value));
               }}
             >
-              <option value={10}>10</option>
+              <option value={12}>12</option>
               <option value={24}>24</option>
               <option value={48}>48</option>
               <option value={72}>72</option>
@@ -64,7 +74,7 @@ const ResultsTab: FC<ResultsTabProps> = (props) => {
           <Pagination
             currentPage={props.currentPage}
             totalItems={props.totalItems}
-            productsPerPage={props.productsPerPage}
+            perPage={props.perPage}
             onPageChange={props.onPageChange}
           />
         </div>

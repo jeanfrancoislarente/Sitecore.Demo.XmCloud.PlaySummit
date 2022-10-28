@@ -13,7 +13,7 @@ export type SpeakerCardProps = {
   job_title: string;
 };
 
-const SessionCard = (props: SpeakerCardProps): JSX.Element => {
+const SpeakerCard = (props: SpeakerCardProps): JSX.Element => {
   const { image_url, name, url, location, company, job_title } = props;
 
   const jobTitle = job_title && (
@@ -49,4 +49,4 @@ const SessionCard = (props: SpeakerCardProps): JSX.Element => {
   );
 };
 
-export default SessionCard;
+export default SpeakerCard;

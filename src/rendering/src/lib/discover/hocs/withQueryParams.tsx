@@ -6,19 +6,28 @@ export type WithQueryParamsProps = {
   query: ParsedUrlQuery;
 };
 const withQueryParams = <T extends WithQueryParamsProps = WithQueryParamsProps>(
-  WrappedComponent: ComponentType<T>
+  WrappedComponent: ComponentType<T>,
+  params: string[]
 ): ComponentType => {
-  const ComponentWithKeyphrase = (props: T): JSX.Element => {
+  const ComponentWithQueryParams = (props: T): JSX.Element => {
     const { query, isReady } = useRouter();
 
     if (!isReady) {
       return null;
     }
-    return <WrappedComponent {...props} query={query} />;
+    return (
+      <WrappedComponent
+        {...props}
+        {...params.reduce(
+          (mem, param) => ({ ...mem, [param]: (query[param] || '').toString() }),
+          {}
+        )}
+      />
+    );
   };
   const displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
-  ComponentWithKeyphrase.displayName = `withQueryParams(${displayName})`;
-  return ComponentWithKeyphrase;
+  ComponentWithQueryParams.displayName = `withQueryParams(${displayName})`;
+  return ComponentWithQueryParams;
 };
 
 export default withQueryParams;

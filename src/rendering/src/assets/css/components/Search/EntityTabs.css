@@ -8,5 +8,6 @@
     align-self: center;
     flex-shrink: 0;
     display: flex;
+    overflow: hidden;
   }
 }
