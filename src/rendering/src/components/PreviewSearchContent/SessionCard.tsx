@@ -11,18 +11,18 @@ export type SessionCardProps = {
   url: string;
   days: string[];
   speakers: string[];
-  time_slots: string[];
+  start_time: string;
 };
 
 const SessionCard = (props: SessionCardProps): JSX.Element => {
-  const { image_url, name, url, days = [], speakers = [], time_slots = [] } = props;
+  const { image_url, name, url, days = [], speakers = [], start_time = '' } = props;
 
-  const date = days && days.length > 0 && time_slots.length > 0 && (
+  const date = days && days.length > 0 && start_time && (
     <p className="session-info">
       <span>
         <FontAwesomeIcon className="icon" icon={faCalendar} />
       </span>
-      {`${days.join(' - ')} at ${time_slots[0]}`}
+      {`${days.join(' - ')} at ${start_time}`}
     </p>
   );
 

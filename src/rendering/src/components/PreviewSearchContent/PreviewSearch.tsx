@@ -1,13 +1,23 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import debounce from '../../helpers/Debounce';
-import ClickOutside from '../ShopCommon/ClickOutside';
 import PreviewSearchContainer from './PreviewSearchContainer';
 import SearchInput from './SearchInput';
+import ClickOutside from 'components/ShopCommon/ClickOutside';
 
 const PreviewSearch = (): JSX.Element => {
-  const [open, setOpen] = useState(false);
+  const { events } = useRouter();
+  const [openPreviewSearch, setPreviewSearchOpen] = useState(false);
   const [keyphrase, setKeyphrase] = useState('');
-  const ref = useRef(null);
+
+  useEffect(() => {
+    // subscribe to next/router event
+    events.on('routeChangeStart', () => setPreviewSearchOpen(false));
+    return () => {
+      // unsubscribe to event on unmount to prevent memory leak
+      events.off('routeChangeStart', () => setPreviewSearchOpen(false));
+    };
+  }, [setPreviewSearchOpen, events]);
 
   const changeKeyphrase: (text: string) => void = debounce(
     (text) => {
@@ -24,20 +34,22 @@ const PreviewSearch = (): JSX.Element => {
     [changeKeyphrase]
   );
 
-  const closePopup = useCallback(() => setOpen(false), []);
-  ClickOutside([ref], closePopup);
+  const ref = useRef(null);
+  ClickOutside([ref], () => setPreviewSearchOpen(false));
 
   return (
     <div ref={ref}>
-      {open && <PreviewSearchContainer keyphrase={keyphrase} close={closePopup} />}
+      {openPreviewSearch && (
+        <PreviewSearchContainer keyphrase={keyphrase} close={() => setPreviewSearchOpen(false)} />
+      )}
       <SearchInput
         placeholder="Search content"
         redirectUrl="search"
         keyphrase={keyphrase}
         setSearchString={changeKeyphrase}
         onFocus={onFocus}
-        setOpen={setOpen}
-        open={open}
+        setOpen={setPreviewSearchOpen}
+        open={openPreviewSearch}
       />
     </div>
   );

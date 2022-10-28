@@ -1,30 +1,20 @@
-import Link from 'next/link';
-import router from 'next/router';
 import SpeakerCard, { SpeakerCardProps } from './SpeakerCard';
 
 export type SpeakerListProps = {
   resultsUrl: string;
   list?: SpeakerCardProps[];
-  closePopup: () => void;
 };
 
-const VIEW_ALL_SPEAKERS_URL = '/speakers';
-
 const PreviewSearchSpeakerList = (props: SpeakerListProps): JSX.Element => {
-  const { resultsUrl, list = [], closePopup } = props;
-
-  const viewAllClick = () => {
-    closePopup();
-    router.push(`${VIEW_ALL_SPEAKERS_URL}`);
-  };
+  const { resultsUrl, list = [] } = props;
 
   return (
     <section className="speaker-list item-grid">
       <span className="speaker-list-title">
         Speakers
-        <Link href={`${resultsUrl}&tab=speakers`} onClick={viewAllClick}>
-          <a className="view-all">View All</a>
-        </Link>
+        <a href={`${resultsUrl}&tab=speakers`} className="view-all">
+          View All
+        </a>
       </span>
       <div className="grid-content speaker-list-content">
         {list.length > 0 && list.map((item) => <SpeakerCard key={item.id} {...item} />)}

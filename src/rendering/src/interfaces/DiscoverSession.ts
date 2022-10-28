@@ -8,4 +8,5 @@ export interface DiscoverSession extends DiscoverEntity {
   speakers: string[];
   is_premium: boolean;
   duration: number;
+  start_time: string;
 }

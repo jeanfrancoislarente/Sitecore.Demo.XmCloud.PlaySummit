@@ -24,6 +24,7 @@ export interface DiscoverResponseBase {
       value?: DiscoverResponseFacet[];
     };
   };
+  suggestion?: unknown[];
 }
 export interface DiscoverResponse<T extends DiscoverEntity> extends DiscoverResponseBase {
   content?: T[];
