@@ -117,8 +117,9 @@ export const ResultsContainer = (props: ResultsContainerProps): JSX.Element => {
     };
   }, [days, rooms]);
 
+  // using keyphrase as key allow us to re mount results, "resetting" any control in it
   return (
-    <SearchProvider keyphrase={keyphrase}>
+    <SearchProvider key={keyphrase} keyphrase={keyphrase}>
       <Results filterOptions={filterOptions} tabs={tabs} selectedTab={tab} />
     </SearchProvider>
   );
