@@ -5,14 +5,6 @@ import { DiscoverResponseBase } from '../../interfaces/discover/DiscoverResponse
 const domainId = process.env.NEXT_PUBLIC_SEARCH_API_DOMAIN || '';
 const host = process.env.NEXT_PUBLIC_SEARCH_API_HOST || '';
 
-const discoverSuggestionByEntity = {
-  session: [{ name: 'session_name_context_aware' }],
-  content: [{ name: 'content_name_context_aware' }],
-  speaker: [{ name: 'speaker_name_context_aware' }],
-  sponsor: [{}],
-  vendor: [{}],
-};
-
 export const doGet = async <T extends DiscoverResponseBase = DiscoverResponseBase>(
   widgetId: string,
   data: unknown
@@ -94,7 +86,6 @@ export const get = async <T extends DiscoverResponseBase = DiscoverResponseBase>
           },
           content: {},
           limit: limit ? limit : 10,
-          suggestion: discoverSuggestionByEntity[entity] || undefined,
           offset: Math.max(0, (page - 1) * limit || 0),
           sort: {
             ...(sort ? { value: [{ name: sort }] } : {}),

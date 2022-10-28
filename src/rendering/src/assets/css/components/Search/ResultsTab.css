@@ -53,7 +53,7 @@
     }
 
     .section, .section .container, .section .container .content {
-      @apply p-0;
+      @apply p-0 m-0;
     }
 
     .section.section-news-list .container .content .news .text-container .news-excerpt {

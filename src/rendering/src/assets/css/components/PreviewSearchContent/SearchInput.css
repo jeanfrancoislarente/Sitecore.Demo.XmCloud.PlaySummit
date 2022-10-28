@@ -1,9 +1,8 @@
 .search-input-play {
-  border-radius: 1px;
+  border-radius: 0.015rem;
   position: absolute;
   outline: 10px solid #fff;
-  right: 0;
-  width: 40vw;
+  right: 16px;
 
   @media (max-width: 1280px) {
     left: 0;

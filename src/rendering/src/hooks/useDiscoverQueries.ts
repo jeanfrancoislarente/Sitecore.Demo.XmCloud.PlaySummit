@@ -6,7 +6,7 @@ import { DiscoverRequestProps } from '../lib/discover/api';
 
 export type QUERY_TYPES = 'session' | 'speaker' | 'content' | 'vendor' | 'sponsor' | 'free';
 export type CustomQueries = {
-  [key in QUERY_TYPES]: Omit<DiscoverRequestProps, 'entity' | 'widgetId'>;
+  [key in QUERY_TYPES]?: unknown;
 };
 export type UseDiscoverQueriesResult<T extends DiscoverResponseBase[]> = {
   isLoading: boolean;

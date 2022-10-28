@@ -1,7 +1,15 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/router';
-import { ChangeEvent, FocusEvent, KeyboardEvent, useCallback, useRef, useState } from 'react';
+import {
+  ChangeEvent,
+  FocusEvent,
+  KeyboardEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 type SearchInputProps = {
   keyphrase: string;
@@ -24,6 +32,18 @@ const SearchInput = ({
   const [inputSearchVisibility, setInputSearchVisibility] = useState(false);
   const router = useRouter();
   const ref = useRef(null);
+
+  useEffect(() => {
+    if (inputSearchVisibility && ref.current) {
+      ref.current.focus();
+    }
+  }, [inputSearchVisibility]);
+
+  useEffect(() => {
+    if (!open) {
+      setInputSearchVisibility(false);
+    }
+  }, [open]);
 
   const redirectToSearchPage = useCallback(
     (searchTerm: string) => {
@@ -48,7 +68,10 @@ const SearchInput = ({
 
   const handleSearchIconClick = useCallback(() => {
     setInputSearchVisibility(!inputSearchVisibility);
-  }, [inputSearchVisibility]);
+    if (inputSearchVisibility) {
+      setOpen(false);
+    }
+  }, [inputSearchVisibility, setOpen]);
 
   const handleOnChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -78,11 +101,11 @@ const SearchInput = ({
           placeholder={placeholder}
           onKeyUp={keyListener}
           autoComplete="off"
-          className={`search-input-play`}
+          className="search-input-play"
         />
       )}
       <FontAwesomeIcon
-        className={`search-play-icon`}
+        className="search-play-icon"
         icon={faSearch}
         onClick={handleSearchIconClick}
       />

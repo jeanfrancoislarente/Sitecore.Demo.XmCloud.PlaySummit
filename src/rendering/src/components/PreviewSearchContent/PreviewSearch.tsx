@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import debounce from '../../helpers/Debounce';
 import PreviewSearchContainer from './PreviewSearchContainer';
 import SearchInput from './SearchInput';
-import ClickOutside from 'components/ShopCommon/ClickOutside';
+import ClickOutside from '../ShopCommon/ClickOutside';
 
 const PreviewSearch = (): JSX.Element => {
   const { events } = useRouter();

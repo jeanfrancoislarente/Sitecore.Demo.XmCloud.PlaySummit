@@ -4,7 +4,6 @@ import { DiscoverNews } from '../../interfaces/discover/DiscoverNews';
 import { DiscoverResponse } from '../../interfaces/discover/DiscoverResponse';
 import { DiscoverSession } from '../../interfaces/discover/DiscoverSession';
 import { DiscoverSpeaker } from '../../interfaces/discover/DiscoverSpeaker';
-import ClickOutside from '../ShopCommon/ClickOutside';
 import PreviewSearchNewsList from './PreviewSearchNewsList';
 import PreviewSearchSessionList from './PreviewSearchSessionList';
 import PreviewSearchSpeakerList from './PreviewSearchSpeakerList';
@@ -32,6 +31,12 @@ type SuggestionMap = {
   [key: string]: Array<Suggestion>;
 };
 
+const discoverSuggestionByEntity = {
+  session: [{ name: 'session_name_context_aware' }],
+  content: [{ name: 'content_name_context_aware' }],
+  speaker: [{ name: 'speaker_name_context_aware' }],
+};
+
 const getSuggestions = (
   newsSuggestions: SuggestionMap,
   sessionsSuggestions: SuggestionMap,
@@ -44,12 +49,9 @@ const getSuggestions = (
 
 export const PreviewSearchPopup = forwardRef<HTMLDivElement, PreviewSearchPopupProps>(
   (
-    { resultsUrl, news, sessions, speakers, close }: PreviewSearchPopupProps,
+    { resultsUrl, news, sessions, speakers }: PreviewSearchPopupProps,
     forwardedRef
   ): JSX.Element => {
-    const popupRef = useRef(null);
-    ClickOutside([popupRef], close);
-
     const suggestions = getSuggestions(
       news?.suggestion as unknown as SuggestionMap,
       sessions?.suggestion as unknown as SuggestionMap,
@@ -66,7 +68,7 @@ export const PreviewSearchPopup = forwardRef<HTMLDivElement, PreviewSearchPopupP
         newsAvailable) && (
         <div className="preview-search-content-container" ref={forwardedRef}>
           <div className="preview-search-content">
-            <div className="preview-search-content-popup" ref={popupRef}>
+            <div className="preview-search-content-popup">
               {suggestions && suggestions.length > 0 && (
                 <SuggestionList title="Do you mean?" list={suggestions} />
               )}
@@ -98,11 +100,31 @@ const PreviewSearchContainer = ({ keyphrase, close }: PreviewSearchContainerProp
       DiscoverResponse<DiscoverSession>,
       DiscoverResponse<DiscoverSpeaker>
     ]
-  >(['content', 'session', 'speaker'], {
-    keyphrase,
-    limit: 4,
-    widgetId: 'rfkid_6',
-  });
+  >(
+    ['content', 'session', 'speaker'],
+    {
+      keyphrase,
+      limit: 4,
+      widgetId: 'rfkid_6',
+    },
+    {
+      session: {
+        search: {
+          suggestion: discoverSuggestionByEntity.session,
+        },
+      },
+      speaker: {
+        search: {
+          suggestion: discoverSuggestionByEntity.speaker,
+        },
+      },
+      content: {
+        search: {
+          suggestion: discoverSuggestionByEntity.content,
+        },
+      },
+    }
+  );
 
   const keyphraseRef = useRef<string>();
   useEffect(() => {
