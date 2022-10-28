@@ -42,10 +42,10 @@ const SearchProvider = (props: SearchProviderProps): JSX.Element => {
     setFilters((prevFilters) => {
       const id = facetId === 'schedule' ? 'days' : facetId;
       let result: DiscoverRequestFilter[];
-      if (facetValueId === '') {
-        result = prevFilters.filter(({ facetId: currentFacetId }) => currentFacetId === facetId);
-      } else {
-        result = [...prevFilters, { facetId: id, facetValueId }];
+      // removes previous values for current selected filter
+      result = prevFilters.filter(({ facetId: currentFacetId }) => currentFacetId !== id);
+      if (facetValueId !== '') {
+        result = [...result, { facetId: id, facetValueId }];
       }
       return result;
     });
