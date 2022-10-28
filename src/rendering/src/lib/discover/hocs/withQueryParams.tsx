@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router';
-import { ParsedUrlQuery } from 'querystring';
 import { ComponentType } from 'react';
 
 export type WithQueryParamsProps = {
-  query: ParsedUrlQuery;
+  [key in string]: unknown;
 };
 const withQueryParams = <T extends WithQueryParamsProps = WithQueryParamsProps>(
   WrappedComponent: ComponentType<T>,
