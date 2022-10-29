@@ -1,17 +1,17 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import EntityTabs from '../../components/Search/EntityTabs';
+import SearchEntityTabs from '../../components/Search/SearchEntityTabs';
 import SearchProvider from '../../components/Search/SearchProvider';
 
 export default {
-  title: 'Components/Search/EntityTabs',
-  component: EntityTabs,
-} as ComponentMeta<typeof EntityTabs>;
+  title: 'Components/Search/SearchEntityTabs',
+  component: SearchEntityTabs,
+} as ComponentMeta<typeof SearchEntityTabs>;
 
-const Template: ComponentStory<typeof EntityTabs> = (args) => (
+const Template: ComponentStory<typeof SearchEntityTabs> = (args) => (
   <SearchProvider keyphrase="">
-    <EntityTabs {...args} />
+    <SearchEntityTabs {...args} />
   </SearchProvider>
 );
 

@@ -1,6 +1,6 @@
 import { DiscoverRequestFilter } from 'lib/discover/api';
 import { createContext, PropsWithChildren, useCallback, useMemo, useState } from 'react';
-import { FiltersProps } from './Filters';
+import { FiltersProps } from './SearchFilters';
 
 type SearchContextType = {
   keyphrase: string;

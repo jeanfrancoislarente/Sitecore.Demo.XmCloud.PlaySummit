@@ -2,15 +2,15 @@ import { Image, Text } from '@sitecore-jss/sitecore-jss-nextjs';
 import Link from 'next/link';
 import { speakerAdapter } from '../../helpers/DiscoverHelper';
 import { DiscoverSpeaker } from '../../interfaces/discover/DiscoverSpeaker';
-import ResultsTab, { ResultsTabProps } from './ResultsTab';
+import SearchResultsTab, { ResultsTabProps } from './SearchResultsTab';
 
 export type SpeakerResultsTabProps = ResultsTabProps & {
   items: DiscoverSpeaker[];
 };
 
-const SpeakerResultsTab = (props: SpeakerResultsTabProps): JSX.Element => {
+const SearchSpeakerResultsTab = (props: SpeakerResultsTabProps): JSX.Element => {
   return (
-    <ResultsTab
+    <SearchResultsTab
       loading={props.loading}
       facets={props.facets}
       filters={props.filters}
@@ -44,8 +44,8 @@ const SpeakerResultsTab = (props: SpeakerResultsTabProps): JSX.Element => {
           </Link>
         ))}
       </div>
-    </ResultsTab>
+    </SearchResultsTab>
   );
 };
 
-export default SpeakerResultsTab;
+export default SearchSpeakerResultsTab;

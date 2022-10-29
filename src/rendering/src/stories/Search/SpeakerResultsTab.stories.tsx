@@ -1,17 +1,17 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import SpeakerResultsTab from '../../components/Search/SpeakerResultsTab';
+import SearchSpeakerResultsTab from '../../components/Search/SearchSpeakerResultsTab';
 import { DiscoverSpeaker } from '../../interfaces/discover/DiscoverSpeaker';
 import { defaultArgs } from './ResultsTabArgs';
 
 export default {
-  title: 'Components/Search/SpeakerResultsTab',
-  component: SpeakerResultsTab,
-} as ComponentMeta<typeof SpeakerResultsTab>;
+  title: 'Components/Search/SearchSpeakerResultsTab',
+  component: SearchSpeakerResultsTab,
+} as ComponentMeta<typeof SearchSpeakerResultsTab>;
 
-const Template: ComponentStory<typeof SpeakerResultsTab> = (args) => (
-  <SpeakerResultsTab {...args} />
+const Template: ComponentStory<typeof SearchSpeakerResultsTab> = (args) => (
+  <SearchSpeakerResultsTab {...args} />
 );
 
 export const Default = Template.bind({});

@@ -3,13 +3,13 @@ import React, { PropsWithChildren, useContext, useMemo } from 'react';
 import { DiscoverResponseBase } from '../../interfaces/discover/DiscoverResponse';
 import connectResultsTab from '../../lib/discover/hocs/connectResultsTab';
 import * as api from '../../lib/discover/api';
-import NewsResultsTab from './NewsResultsTab';
-import SessionResultsTab from './SessionResultsTab';
-import SpeakerResultsTab from './SpeakerResultsTab';
-import SponsorResultsTab from './SponsorResultsTab';
-import VendorResultsTab from './VendorResultsTab';
-import EntityTabs, { Tab } from './EntityTabs';
-import Filters, { FiltersProps } from './Filters';
+import SearchNewsResultsTab from './SearchNewsResultsTab';
+import SearchSessionResultsTab from './SearchSessionResultsTab';
+import SearchSpeakerResultsTab from './SearchSpeakerResultsTab';
+import SearchSponsorResultsTab from './SearchSponsorResultsTab';
+import SearchVendorResultsTab from './SearchVendorResultsTab';
+import SearchEntityTabs, { Tab } from './SearchEntityTabs';
+import Filters, { FiltersProps } from './SearchFilters';
 import SearchProvider, { SearchContext } from './SearchProvider';
 
 export type ResultsProps = PropsWithChildren & {
@@ -26,7 +26,7 @@ const tabs = [
     Component: connectResultsTab({
       entity: 'session',
       facetsTypes: ['audience', 'is_premium', 'sponsors', 'vendors', 'speakers'],
-    })(SessionResultsTab),
+    })(SearchSessionResultsTab),
   },
   {
     id: 'speaker',
@@ -35,7 +35,7 @@ const tabs = [
     Component: connectResultsTab({
       entity: 'speaker',
       facetsTypes: ['company', 'job_title', 'location', 'sessions', 'is_featured'],
-    })(SpeakerResultsTab),
+    })(SearchSpeakerResultsTab),
   },
   {
     id: 'vendor',
@@ -44,7 +44,7 @@ const tabs = [
     Component: connectResultsTab({
       entity: 'vendor',
       facetsTypes: ['activities', 'level', 'speakers', 'sessions'],
-    })(VendorResultsTab),
+    })(SearchVendorResultsTab),
   },
   {
     id: 'sponsor',
@@ -53,7 +53,7 @@ const tabs = [
     Component: connectResultsTab({
       entity: 'sponsor',
       facetsTypes: ['level', 'speakers', 'sessions'],
-    })(SponsorResultsTab),
+    })(SearchSponsorResultsTab),
   },
   {
     id: 'content',
@@ -63,11 +63,11 @@ const tabs = [
       entity: 'content',
       hasFilters: false,
       facetsTypes: ['audience'],
-    })(NewsResultsTab),
+    })(SearchNewsResultsTab),
   },
 ];
 
-const Results = (props: ResultsProps): JSX.Element => {
+const SearchResults = (props: ResultsProps): JSX.Element => {
   const { keyphrase, onChangeFilter } = useContext(SearchContext);
   return (
     <div className="search-results">
@@ -79,7 +79,7 @@ const Results = (props: ResultsProps): JSX.Element => {
         onChange={onChangeFilter}
         className="search-results-filters"
       />
-      <EntityTabs
+      <SearchEntityTabs
         selected={props.selectedTab || 'session'}
         tabs={props.tabs}
         className="search-results-tabs"
@@ -120,9 +120,9 @@ export const ResultsContainer = (props: ResultsContainerProps): JSX.Element => {
   // using keyphrase as key allow us to re mount results, "resetting" any control in it
   return (
     <SearchProvider key={keyphrase} keyphrase={keyphrase}>
-      <Results filterOptions={filterOptions} tabs={tabs} selectedTab={tab} />
+      <SearchResults filterOptions={filterOptions} tabs={tabs} selectedTab={tab} />
     </SearchProvider>
   );
 };
 
-export default Results;
+export default SearchResults;

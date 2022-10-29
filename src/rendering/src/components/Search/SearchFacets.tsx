@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import { FacetValueClickedActionPayload } from '../../interfaces/discover/FacetValueClickedActionPayload';
 import { SearchContext } from '../../components/Search/SearchProvider';
 import { DiscoverRequestFilter } from '../../lib/discover/api';
-import * as AccordionFacets from './AccordionFacets/AccordionFacets';
+import * as AccordionFacets from './SearchAccordionFacetsPrimitive';
 
 export type FacetValue = {
   id: string;
@@ -37,7 +37,7 @@ const getFacetLabel = ({ text }: FacetValue): string => {
   return text;
 };
 
-const Facets = (props: FacetsProps): JSX.Element => {
+const SearchFacets = (props: FacetsProps): JSX.Element => {
   const { filters } = useContext(SearchContext);
   const filterIds = filters.map(({ facetId }) => facetId);
   const facetNames = Object.keys(props.facets);
@@ -117,4 +117,4 @@ const Facets = (props: FacetsProps): JSX.Element => {
   );
 };
 
-export default Facets;
+export default SearchFacets;

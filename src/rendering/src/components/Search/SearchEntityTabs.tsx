@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState, FC, useEffect } from 'react';
-import EntityTab from './EntityTab';
-import EntityTabContent from './EntityTabContent';
+import SearchEntityTab from './SearchEntityTab';
+import EntityTabContent from './SearchEntityTabContent';
 import { SearchContext } from './SearchProvider';
 
 export type Tab = {
@@ -17,7 +17,7 @@ export type EntityTabsProps = {
   tabs: Tab[];
 };
 
-const EntityTabs = (props: EntityTabsProps): JSX.Element => {
+const SearchEntityTabs = (props: EntityTabsProps): JSX.Element => {
   const { totals } = useContext(SearchContext);
   const { selected } = props;
   const themeClass = props.theme ? `entity-tabs-${props.theme}` : '';
@@ -43,7 +43,7 @@ const EntityTabs = (props: EntityTabsProps): JSX.Element => {
         data-orientation="horizontal"
       >
         {props.tabs.map(({ id, name, color }) => (
-          <EntityTab
+          <SearchEntityTab
             key={id}
             id={id}
             active={activeTab === id}
@@ -62,4 +62,4 @@ const EntityTabs = (props: EntityTabsProps): JSX.Element => {
   );
 };
 
-export default EntityTabs;
+export default SearchEntityTabs;

@@ -2,17 +2,17 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import SearchProvider from '../../components/Search/SearchProvider';
-import Facets from '../../components/Search/Facets';
+import SearchFacets from '../../components/Search/SearchFacets';
 import { facetsProp, filtersProp } from '../mock-discover-data';
 
 export default {
-  title: 'Components/Search/Facets',
-  component: Facets,
-} as ComponentMeta<typeof Facets>;
+  title: 'Components/Search/SearchFacets',
+  component: SearchFacets,
+} as ComponentMeta<typeof SearchFacets>;
 
-const Template: ComponentStory<typeof Facets> = (args) => (
+const Template: ComponentStory<typeof SearchFacets> = (args) => (
   <SearchProvider keyphrase="test">
-    <Facets {...args} />
+    <SearchFacets {...args} />
   </SearchProvider>
 );
 

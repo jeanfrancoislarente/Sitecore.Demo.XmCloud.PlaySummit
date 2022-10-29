@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { omit } from 'lodash';
 import { debounceAsync, getSortingOptions } from '../../../helpers/DiscoverHelper';
 import { FC, useCallback, useContext, useEffect, useState } from 'react';
-import ResultsTab from '../../../components/Search/ResultsTab';
+import SearchResultsTab from '../../../components/Search/SearchResultsTab';
 import { SearchContext } from '../../../components/Search/SearchProvider';
 import { FacetValueClickedActionPayload } from '../../../interfaces/discover/FacetValueClickedActionPayload';
 import * as api from '../api';
@@ -32,7 +32,7 @@ const connectResultsTab = ({
   facetsTypes: string[];
   defaultPerPage?: number;
   defaultSort?: string;
-}): (<T extends typeof ResultsTab>(WrappedComponent: T) => FC) => {
+}): (<T extends typeof SearchResultsTab>(WrappedComponent: T) => FC) => {
   // Since some of the state needs to be reset when top filters change, we want to debounce the actual request
   // to use the latest state
   const search = debounceAsync(
@@ -73,7 +73,7 @@ const connectResultsTab = ({
         }),
     50
   );
-  return <T extends typeof ResultsTab>(WrappedComponent: T): FC => {
+  return <T extends typeof SearchResultsTab>(WrappedComponent: T): FC => {
     const Component: FC = () => {
       const { keyphrase, filters: topFilters, onUpdate } = useContext(SearchContext);
       const [tabFilters, setTabFilters] = useState<DiscoverRequestFilter[]>([]);

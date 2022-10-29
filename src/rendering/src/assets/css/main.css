@@ -125,6 +125,7 @@
 @import './components/PreviewSearchContent/NewsList.css';
 
 /* Discover Search */
+@import './components/Search/Search.css';
 @import './components/Search/EntityTabs.css';
 @import './components/Search/EntityTab.css';
 @import './components/Search/EntityTabContent.css';

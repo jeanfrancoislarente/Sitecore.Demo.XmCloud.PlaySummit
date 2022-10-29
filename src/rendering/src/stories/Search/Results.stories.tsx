@@ -2,17 +2,17 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import SearchProvider from '../../components/Search/SearchProvider';
-import Results from '../../components/Search/Results';
+import SearchResults from '../../components/Search/SearchResults';
 import { filterOptionsProp } from '../mock-discover-data';
 
 export default {
-  title: 'Components/Search/Results',
-  component: Results,
-} as ComponentMeta<typeof Results>;
+  title: 'Components/Search/SearchResults',
+  component: SearchResults,
+} as ComponentMeta<typeof SearchResults>;
 
-const Template: ComponentStory<typeof Results> = (args) => (
+const Template: ComponentStory<typeof SearchResults> = (args) => (
   <SearchProvider keyphrase="test">
-    <Results {...args}>My content</Results>
+    <SearchResults {...args}>My content</SearchResults>
   </SearchProvider>
 );
 

@@ -2,11 +2,15 @@
   bottom: 0;
   overflow-y: auto;
   position: fixed;
-  right: 1vw;
-  top: 84px;
+  right: 10rem;
+  top: 5.5rem;
 
   @media (max-width: 1280px) {
     display: none;
+  }
+
+  @media (max-width: 2000px) {
+    right: 5rem;
   }
 
   .preview-search-content {

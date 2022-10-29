@@ -1,16 +1,18 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import VendorResultsTab from '../../components/Search/VendorResultsTab';
+import SearchVendorResultsTab from '../../components/Search/SearchVendorResultsTab';
 import { DiscoverVendor } from '../../interfaces/discover/DiscoverVendor';
 import { defaultArgs } from './ResultsTabArgs';
 
 export default {
-  title: 'Components/Search/VendorResultsTab',
-  component: VendorResultsTab,
-} as ComponentMeta<typeof VendorResultsTab>;
+  title: 'Components/Search/SearchVendorResultsTab',
+  component: SearchVendorResultsTab,
+} as ComponentMeta<typeof SearchVendorResultsTab>;
 
-const Template: ComponentStory<typeof VendorResultsTab> = (args) => <VendorResultsTab {...args} />;
+const Template: ComponentStory<typeof SearchVendorResultsTab> = (args) => (
+  <SearchVendorResultsTab {...args} />
+);
 
 export const Default = Template.bind({});
 

@@ -1,4 +1,4 @@
-import Filter, { Option } from './Filter';
+import SearchFilter, { Option } from './SearchFilter';
 
 export type FiltersProps = {
   onChange: (id: string, value: string) => void;
@@ -23,7 +23,7 @@ const Filters = (props: FiltersProps): JSX.Element => {
       <div>Filter by</div>
       <div className="search-filters-list">
         {filters.map(({ id, name }) => (
-          <Filter
+          <SearchFilter
             key={id}
             name={name}
             options={props.options[id]}

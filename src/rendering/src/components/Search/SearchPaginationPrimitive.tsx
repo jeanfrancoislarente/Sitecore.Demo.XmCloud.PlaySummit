@@ -2,8 +2,8 @@ import * as RadixContext from '@radix-ui/react-context';
 import * as Radix from '@radix-ui/react-primitive';
 import React, { useCallback } from 'react';
 
-import type { Pagination as UsePagination } from '../../../hooks/usePagination';
-import usePagination from '../../../hooks/usePagination';
+import type { Pagination as UsePagination } from '../../hooks/usePagination';
+import usePagination from '../../hooks/usePagination';
 
 /* -------------------------------------------------------------------------------------------------
  * Pagination
@@ -48,35 +48,34 @@ const [PaginationProvider, usePaginationContext] =
   createPaginationContext<PaginationContextValue>(PAGINATION_NAME);
 const defaultHrefFunc = (page: number) => `#${page}`;
 
-const PaginationUI: React.FC<PaginationProps> = React.forwardRef<
-  PaginationElement,
-  PaginationProps
->((props: ScopedProps<PaginationProps>, forwardedRef) => {
-  const {
-    __scopePagination,
-    totalPages,
-    currentPage,
-    defaultCurrentPage,
-    onPageChange,
-    href = defaultHrefFunc,
-    ...paginationProps
-  } = props;
+const Pagination: React.FC<PaginationProps> = React.forwardRef<PaginationElement, PaginationProps>(
+  (props: ScopedProps<PaginationProps>, forwardedRef) => {
+    const {
+      __scopePagination,
+      totalPages,
+      currentPage,
+      defaultCurrentPage,
+      onPageChange,
+      href = defaultHrefFunc,
+      ...paginationProps
+    } = props;
 
-  const pagination = usePagination({
-    totalPages,
-    currentPage,
-    defaultCurrentPage,
-    onPageChange,
-  });
+    const pagination = usePagination({
+      totalPages,
+      currentPage,
+      defaultCurrentPage,
+      onPageChange,
+    });
 
-  return (
-    <PaginationProvider scope={__scopePagination} {...pagination} hrefFunc={href}>
-      <Radix.Primitive.nav aria-label="pagination" {...paginationProps} ref={forwardedRef} />
-    </PaginationProvider>
-  );
-});
+    return (
+      <PaginationProvider scope={__scopePagination} {...pagination} hrefFunc={href}>
+        <Radix.Primitive.nav aria-label="pagination" {...paginationProps} ref={forwardedRef} />
+      </PaginationProvider>
+    );
+  }
+);
 
-PaginationUI.displayName = PAGINATION_NAME;
+Pagination.displayName = PAGINATION_NAME;
 
 /* -------------------------------------------------------------------------------------------------
  * PaginationFirstPage
@@ -354,7 +353,7 @@ const PaginationTruncate = React.forwardRef<PaginationTruncateElement, Paginatio
 
 PaginationTruncate.displayName = PAGINATION_TRUNCATE;
 
-const Root = PaginationUI;
+const Root = Pagination;
 const FirstPage = PaginationFirstPage;
 const LastPage = PaginationLastPage;
 const PrevPage = PaginationPrevPage;
@@ -367,7 +366,7 @@ export {
   createPaginationContext,
   createPaginationScope,
   //
-  PaginationUI,
+  Pagination,
   PaginationFirstPage,
   PaginationLastPage,
   PaginationPrevPage,

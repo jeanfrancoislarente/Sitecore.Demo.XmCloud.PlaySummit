@@ -1,6 +1,6 @@
 import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 import { MouseEventHandler } from 'react';
-import * as Pagination from './PaginationUI/PaginationUI';
+import * as Pagination from './SearchPaginationPrimitive';
 
 export type PaginationProps = {
   currentPage: number;

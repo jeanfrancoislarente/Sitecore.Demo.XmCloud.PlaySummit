@@ -10,7 +10,7 @@ export type FilterProps = {
   options?: Option[];
 };
 
-const Filter = (props: FilterProps): JSX.Element => {
+const SearchFilter = (props: FilterProps): JSX.Element => {
   const { options = [] } = props;
   return (
     <select
@@ -29,4 +29,4 @@ const Filter = (props: FilterProps): JSX.Element => {
   );
 };
 
-export default Filter;
+export default SearchFilter;

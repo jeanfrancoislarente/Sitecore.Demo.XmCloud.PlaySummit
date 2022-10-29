@@ -1,14 +1,14 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import Filter from '../../components/Search/Filter';
+import SearchFilter from '../../components/Search/SearchFilter';
 
 export default {
-  title: 'Components/Search/Filter',
-  component: Filter,
-} as ComponentMeta<typeof Filter>;
+  title: 'Components/Search/SearchFilter',
+  component: SearchFilter,
+} as ComponentMeta<typeof SearchFilter>;
 
-const Template: ComponentStory<typeof Filter> = (args) => <Filter {...args} />;
+const Template: ComponentStory<typeof SearchFilter> = (args) => <SearchFilter {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

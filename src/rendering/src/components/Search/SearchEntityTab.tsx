@@ -8,7 +8,7 @@ export type EntityTabProps = {
   onSelect?: (id: string) => void;
 };
 
-const EntityTab = (props: EntityTabProps): JSX.Element => {
+const SearchEntityTab = (props: EntityTabProps): JSX.Element => {
   const { id, onSelect } = props;
   const onSelectTabCallback = useCallback(() => {
     onSelect && onSelect(id);
@@ -30,4 +30,4 @@ const EntityTab = (props: EntityTabProps): JSX.Element => {
   );
 };
 
-export default EntityTab;
+export default SearchEntityTab;

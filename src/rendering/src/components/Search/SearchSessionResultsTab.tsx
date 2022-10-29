@@ -1,15 +1,15 @@
 import { sessionAdapter } from '../../helpers/DiscoverHelper';
 import { DiscoverSession } from '../../interfaces/discover/DiscoverSession';
 import SessionItem from '../Sessions/SessionItem';
-import ResultsTab, { ResultsTabProps } from './ResultsTab';
+import SearchResultsTab, { ResultsTabProps } from './SearchResultsTab';
 
 export type SessionResultsTabProps = ResultsTabProps & {
   items: DiscoverSession[];
 };
 
-const SessionResultsTab = (props: SessionResultsTabProps): JSX.Element => {
+const SearchSessionResultsTab = (props: SessionResultsTabProps): JSX.Element => {
   return (
-    <ResultsTab
+    <SearchResultsTab
       loading={props.loading}
       facets={props.facets}
       filters={props.filters}
@@ -32,8 +32,8 @@ const SessionResultsTab = (props: SessionResultsTabProps): JSX.Element => {
           ))}
         </div>
       </div>
-    </ResultsTab>
+    </SearchResultsTab>
   );
 };
 
-export default SessionResultsTab;
+export default SearchSessionResultsTab;

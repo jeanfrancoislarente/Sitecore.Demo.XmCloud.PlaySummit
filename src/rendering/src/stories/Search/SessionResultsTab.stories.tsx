@@ -1,17 +1,17 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import SessionResultsTab from '../../components/Search/SessionResultsTab';
+import SearchSessionResultsTab from '../../components/Search/SearchSessionResultsTab';
 import { DiscoverSession } from '../../interfaces/discover/DiscoverSession';
 import { defaultArgs } from './ResultsTabArgs';
 
 export default {
-  title: 'Components/Search/SessionResultsTab',
-  component: SessionResultsTab,
-} as ComponentMeta<typeof SessionResultsTab>;
+  title: 'Components/Search/SearchSessionResultsTab',
+  component: SearchSessionResultsTab,
+} as ComponentMeta<typeof SearchSessionResultsTab>;
 
-const Template: ComponentStory<typeof SessionResultsTab> = (args) => (
-  <SessionResultsTab {...args} />
+const Template: ComponentStory<typeof SearchSessionResultsTab> = (args) => (
+  <SearchSessionResultsTab {...args} />
 );
 
 export const Default = Template.bind({});

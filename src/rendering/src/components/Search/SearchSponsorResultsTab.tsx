@@ -2,15 +2,15 @@ import { Image, Text } from '@sitecore-jss/sitecore-jss-nextjs';
 import Link from 'next/link';
 import { sponsorAdapter } from '../../helpers/DiscoverHelper';
 import { DiscoverSponsor } from '../../interfaces/discover/DiscoverSponsor';
-import ResultsTab, { ResultsTabProps } from './ResultsTab';
+import SearchResultsTab, { ResultsTabProps } from './SearchResultsTab';
 
 export type SponsorResultsTabProps = ResultsTabProps & {
   items: DiscoverSponsor[];
 };
 
-const SponsorResultsTab = (props: SponsorResultsTabProps): JSX.Element => {
+const SearchSponsorResultsTab = (props: SponsorResultsTabProps): JSX.Element => {
   return (
-    <ResultsTab
+    <SearchResultsTab
       loading={props.loading}
       facets={props.facets}
       filters={props.filters}
@@ -49,8 +49,8 @@ const SponsorResultsTab = (props: SponsorResultsTabProps): JSX.Element => {
           </div>
         </div>
       </section>
-    </ResultsTab>
+    </SearchResultsTab>
   );
 };
 
-export default SponsorResultsTab;
+export default SearchSponsorResultsTab;

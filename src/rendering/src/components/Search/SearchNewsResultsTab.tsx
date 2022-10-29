@@ -3,15 +3,15 @@ import Link from 'next/link';
 import { newsDateFormatter } from '../../helpers/DateHelper';
 import { newsAdapter } from '../../helpers/DiscoverHelper';
 import { DiscoverNews } from '../../interfaces/discover/DiscoverNews';
-import ResultsTab, { ResultsTabProps } from './ResultsTab';
+import SearchResultsTab, { ResultsTabProps } from './SearchResultsTab';
 
 export type NewsResultsTabProps = ResultsTabProps & {
   items: DiscoverNews[];
 };
 
-const NewsResultsTab = (props: NewsResultsTabProps): JSX.Element => {
+const SearchNewsResultsTab = (props: NewsResultsTabProps): JSX.Element => {
   return (
-    <ResultsTab
+    <SearchResultsTab
       loading={props.loading}
       facets={props.facets}
       filters={props.filters}
@@ -60,8 +60,8 @@ const NewsResultsTab = (props: NewsResultsTabProps): JSX.Element => {
           </div>
         </div>
       </section>
-    </ResultsTab>
+    </SearchResultsTab>
   );
 };
 
-export default NewsResultsTab;
+export default SearchNewsResultsTab;

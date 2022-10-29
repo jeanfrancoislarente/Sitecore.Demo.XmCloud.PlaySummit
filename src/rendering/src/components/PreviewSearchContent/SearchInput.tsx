@@ -92,18 +92,16 @@ const SearchInput = ({
 
   return (
     <>
-      {inputSearchVisibility && (
-        <input
-          ref={ref}
-          onChange={handleOnChange}
-          onFocus={handleOnFocus}
-          onClick={() => setOpen(true)}
-          placeholder={placeholder}
-          onKeyUp={keyListener}
-          autoComplete="off"
-          className="search-input-play"
-        />
-      )}
+      <input
+        ref={ref}
+        onChange={handleOnChange}
+        onFocus={handleOnFocus}
+        onClick={() => setOpen(true)}
+        placeholder={placeholder}
+        onKeyUp={keyListener}
+        autoComplete="off"
+        className={`search-input-play ${!inputSearchVisibility ? 'search-input-play-hidden' : ''}`}
+      />
       <FontAwesomeIcon
         className="search-play-icon"
         icon={faSearch}

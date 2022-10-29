@@ -6,9 +6,9 @@ import type * as Radix from '@radix-ui/react-primitive';
 import * as CallbackRefHook from '@radix-ui/react-use-callback-ref';
 import React from 'react';
 
-import { createCollectionIndex } from '../CollectionIndex/CollectionIndex';
-import * as FacetValueListPrimitive from '../FacetValueList/FacetValueList';
-import { createContextFacetValueListScope } from '../FacetValueList/FacetValueList';
+import { createCollectionIndex } from '../../lib/discover/collectionIndex';
+import * as FacetValueListPrimitive from './SearchFacetValueListPrimitive';
+import { createContextFacetValueListScope } from './SearchFacetValueListPrimitive';
 
 /* -------------------------------------------------------------------------------------------------
  * AccordionFacets

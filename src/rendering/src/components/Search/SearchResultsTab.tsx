@@ -1,8 +1,8 @@
 import { PropsWithChildren, FC } from 'react';
 import { DiscoverResponseSortChoice } from '../../interfaces/discover/DiscoverResponse';
 import Spinner from '../../components/ShopCommon/Spinner';
-import Facets, { FacetsProps } from './Facets';
-import Pagination, { PaginationProps } from './Pagination';
+import SearchFacets, { FacetsProps } from './SearchFacets';
+import Pagination, { PaginationProps } from './SearchPagination';
 
 export type ResultsTabProps = PropsWithChildren &
   FacetsProps &
@@ -14,11 +14,11 @@ export type ResultsTabProps = PropsWithChildren &
     loading: boolean;
   };
 
-const ResultsTab: FC<ResultsTabProps> = (props) => {
+const SearchResultsTab: FC<ResultsTabProps> = (props) => {
   return (
     <div className="search-results-tab">
       <div className="search-results-tab-facets">
-        <Facets
+        <SearchFacets
           facets={props.facets}
           filters={props.filters}
           onFacetValueClick={props.onFacetValueClick}
@@ -83,4 +83,4 @@ const ResultsTab: FC<ResultsTabProps> = (props) => {
   );
 };
 
-export default ResultsTab;
+export default SearchResultsTab;

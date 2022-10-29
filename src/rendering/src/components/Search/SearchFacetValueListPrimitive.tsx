@@ -9,7 +9,7 @@ import * as CallbackRefHook from '@radix-ui/react-use-callback-ref';
 import * as ControllableState from '@radix-ui/react-use-controllable-state';
 import React from 'react';
 
-import { createCollectionIndex } from '../CollectionIndex/CollectionIndex';
+import { createCollectionIndex } from '../../lib/discover/collectionIndex';
 
 /**
  * TODO: Add see more/less logic

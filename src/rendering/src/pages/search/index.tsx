@@ -5,7 +5,7 @@ import React, { ReactElement } from 'react';
 import HeaderCdpMessageBar from '../../components/HeaderCdpMessageBar';
 import Footer, { FooterProps } from '../../components/Navigation/Footer';
 import MainNavigation from '../../components/Navigation/MainNavigation';
-import { ResultsContainer } from '../../components/Search/Results';
+import { ResultsContainer } from 'components/Search/SearchResults';
 import { SearchLayout } from '../../components/Search/Search';
 import { queryClient } from '../../helpers/DiscoverHelper';
 
