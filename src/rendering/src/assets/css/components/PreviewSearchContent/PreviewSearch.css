@@ -1,5 +1,6 @@
 .preview-search-content-container {
-  bottom: 0;
+  @apply shadow shadow-lg shadow-black-lightest;
+
   overflow-y: auto;
   position: fixed;
   right: 10rem;
