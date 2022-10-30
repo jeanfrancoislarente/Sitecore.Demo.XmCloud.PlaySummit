@@ -4,7 +4,6 @@
   overflow-y: auto;
   position: fixed;
   right: 10rem;
-  top: 5.5rem;
 
   @media (max-width: 1280px) {
     display: none;
@@ -25,6 +24,14 @@
       padding: 0.5rem 1rem;
     }
   }
+}
+
+div.header-eyebrow~nav.main-navigation .preview-search-content-container {
+  top: 6.15rem;
+}
+
+nav.main-navigation .preview-search-content-container {
+  top: 4.65rem;
 }
 
 .search-input-container {

@@ -2,8 +2,8 @@ import { AxiosDataFetcher } from '@sitecore-jss/sitecore-jss-nextjs';
 import { merge, uniq } from 'lodash';
 import { DiscoverResponseBase } from '../../interfaces/discover/DiscoverResponse';
 
-const domainId = process.env.NEXT_PUBLIC_SEARCH_API_DOMAIN || '';
-const host = process.env.NEXT_PUBLIC_SEARCH_API_HOST || '';
+const domainId = process.env.NEXT_PUBLIC_DISCOVER_API_DOMAIN || '';
+const host = process.env.NEXT_PUBLIC_DISCOVER_API_HOST || '';
 
 export const doGet = async <T extends DiscoverResponseBase = DiscoverResponseBase>(
   widgetId: string,
