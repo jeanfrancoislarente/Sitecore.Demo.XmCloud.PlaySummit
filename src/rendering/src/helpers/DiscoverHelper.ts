@@ -113,7 +113,7 @@ export const speakerAdapter = ({
 });
 
 export const vendorAdapter = ({ name, url, level, image_url }: DiscoverVendor): Vendor => ({
-  url,
+  url: getAbsoluteUrlPath(url),
   fields: {
     Name: { value: name },
     Level: { value: level },
@@ -124,7 +124,7 @@ export const vendorAdapter = ({ name, url, level, image_url }: DiscoverVendor): 
 });
 
 export const sponsorAdapter = ({ name, url, image_url }: DiscoverSponsor): Sponsor => ({
-  url,
+  url: getAbsoluteUrlPath(url),
   fields: {
     Name: { value: name },
     Logo: {
